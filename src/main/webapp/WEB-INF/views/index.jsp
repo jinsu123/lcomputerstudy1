@@ -8,22 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Hello World</h1>
-      <table>
-      	<tr>
-      		<td>id</td>
-      		<td>title</td>
-      		<td>content</td>
-      		<td>writer</td>
-      	</tr>
-      	<c:forEach var="list" items="${list}">
-	      	<tr>
-	      		<td>${list.bId }</td>
-	      		<td>${list.bTitle }</td>
-	      		<td>${list.bContent }</td>
-	      		<td>${list.bWriter }</td>
-	      	</tr>
-      	</c:forEach>
-      </table>
+	<h1>Home Page</h1>
+      <hr>
+      	<div>
+      		<a href="/login">로그인</a>>
+      		<a href="/beforeSignUp">회원가입</a>>
+      	</div>
 </body>
 </html>
