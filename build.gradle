@@ -20,6 +20,9 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 	implementation 'org.springframework.session:spring-session-jdbc'
 	runtimeOnly 'mysql:mysql-connector-java'
+	implementation 'org.springframework.security:spring-security-taglibs'
+
+	
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
