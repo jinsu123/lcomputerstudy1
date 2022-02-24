@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,6 +23,7 @@ public class Controller {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired UserService userservice;
 	@Autowired BoardService boardservice;
+	@Autowired PasswordEncoder passwordEncoder;
 	
 	@RequestMapping("/")
 	public String home(Model model) {
@@ -41,7 +43,7 @@ public class Controller {
 	
 	@RequestMapping("/signup")
 	public String signup(User user) {
-		String encodedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
 //		System.out.println("home1");
 		user.setPassword(encodedPassword);
 		user.setAccountNonExpired(true);
@@ -82,6 +84,16 @@ public class Controller {
 		
 		return "/denied";
 	}
+	
+	
+	@RequestMapping("/board/list")
+	public String boardList(Model model) {
+//		System.out.println("home");
+		List<Board> list = boardservice.selectBoardList();
+		model.addAttribute("list", list);
+		return "/boardList";
+	}
+	
 }
 	
 	

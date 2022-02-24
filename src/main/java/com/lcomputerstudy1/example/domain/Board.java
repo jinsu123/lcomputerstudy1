@@ -6,7 +6,14 @@ public class Board {
 	private String bContent;
 	private String bWriter;
 	private String bDatetime;
+	private int bViewCount;
 	
+	public int getbViewCount() {
+		return bViewCount;
+	}
+	public void setbViewCount(int bViewCount) {
+		this.bViewCount = bViewCount;
+	}
 	public int getbId() {
 		return bId;
 	}
