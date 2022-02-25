@@ -85,7 +85,6 @@ public class Controller {
 		return "/denied";
 	}
 	
-	
 	@RequestMapping("/board/list")
 	public String boardList(Model model) {
 //		System.out.println("home");

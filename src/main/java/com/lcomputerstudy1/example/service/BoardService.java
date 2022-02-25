@@ -5,4 +5,6 @@ import com.lcomputerstudy1.example.domain.Board;
 
 public interface BoardService {
 	public List<Board> selectBoardList();
+
+	public List<Board> boardCount();
 }

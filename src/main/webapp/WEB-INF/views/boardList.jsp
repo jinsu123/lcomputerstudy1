@@ -39,6 +39,7 @@ table{
 			<th style="width:20%">내용</th>
 			<th>작성자</th>
 			<th>작성일</th>
+			<th>조회수</th>
 		</tr>
 		<c:forEach items="${list}" var="list">
 			<tr>
@@ -47,6 +48,7 @@ table{
 				<td>${list.bContent}</td>
 				<td>${list.bWriter}</td>
 				<td>${list.bDatetime}</td>
+				<td>${list.bViewCount}</td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -5,12 +5,19 @@ import org.springframework.stereotype.Service;
 import com.lcomputerstudy1.example.domain.Board;
 import com.lcomputerstudy1.example.mapper.BoardMapper;
 
-@Service("BoardServiceImpl")
+@Service
 public class BoardServicelmpl implements BoardService{
 
-	@Autowired BoardMapper boardmapper;
+	@Autowired BoardMapper boardMapper;
+	
 	@Override
 	public List<Board> selectBoardList(){
-		return boardmapper.selectBoardList();
+		return boardMapper.selectBoardList();
 	}
+	@Override
+	public List<Board> boardCount() {
+		return boardMapper.boardCount();
+	}
+	
+	
 }

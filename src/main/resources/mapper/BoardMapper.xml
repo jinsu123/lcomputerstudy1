@@ -11,11 +11,10 @@
 	   </select>
 
    <!-- 게시글 수  -->
-   <insert id="boardCount" parameterType="Board">
+   <select id="boardCount" resultType="Board">
     	 SELECT			 COUNT(*) count 
     	 FROM 				lc_board
-   </insert>   
-
+   </select> 
 
 
 </mapper>
