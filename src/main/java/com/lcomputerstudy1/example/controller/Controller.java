@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lcomputerstudy1.example.domain.Board;
+import com.lcomputerstudy1.example.domain.Pagination;
 import com.lcomputerstudy1.example.domain.User;
+import com.lcomputerstudy1.example.mapper.BoardMapper;
 import com.lcomputerstudy1.example.service.BoardService;
 import com.lcomputerstudy1.example.service.UserService;
 
@@ -26,9 +28,9 @@ public class Controller {
 	@Autowired PasswordEncoder passwordEncoder;
 	
 	@RequestMapping("/")
-	public String home(Model model) {
+	public String home(Model model, Pagination pagination) {
 //		System.out.println("home");
-		List<Board> list = boardservice.selectBoardList();
+		List<Board> list = boardservice.selectBoardList(pagination);
 		model.addAttribute("list", list);
 		logger.debug("debug");
 		logger.info("info");
@@ -86,12 +88,17 @@ public class Controller {
 	}
 	
 	@RequestMapping("/board/list")
-	public String boardList(Model model) {
+	public String boardList(Model model, Pagination pagination) {
 //		System.out.println("home");
-		List<Board> list = boardservice.selectBoardList();
+		
+		List<Board> list = boardservice.selectBoardList(pagination);
+		int boardCount = boardservice.boardCount();
 		model.addAttribute("list", list);
+		model.addAttribute("boardCount", boardCount);
 		return "/boardList";
 	}
+	
+	
 	
 }
 	

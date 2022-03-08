@@ -26,13 +26,28 @@ table{
 	th-2{
 		width:1000px;
 	}
+	ul{
+		width:600px;
+		height:50px;
+		margin:10px auto;
+	}
+	li{
+		list-style:none;
+		width:50px;
+		line-height:50px;
+		border:1px solid #ededed;
+		float:left;
+		text-align:center;
+		margin:0 5px;
+		border-radius:5px;
+	}
 	
 </style>
 <body>
 	<h1>게시판</h1>
 	<table>
 		<tr>
-			<td colspan="6">전체 게시글 수 :</td>
+			<td colspan="6">전체 게시글 수 : ${boardCount} </td>
 		<tr>
 			<th>번호</th>
 			<th style="width:10%">제목</th>
@@ -52,6 +67,41 @@ table{
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<div>
+		<ul>
+			<c:choose>
+				<c:when test="${pagination.prevPage >= 5 }">
+					<li>
+						<a href="board/list?page=${pagination.prevPage}">
+							◀
+						</a>
+					</li>
+				</c:when>	
+			</c:choose>
+			<c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+				<c:choose>
+					<c:when test="${pagination.page == i }">
+						<li style="background-color:#ededed;">	
+							<span>${i}</span>
+						</li>
+					</c:when>
+					<c:when test="${pagination.page != i}">
+						<li>
+							<a href="board/list?page=${i}">${i}</a>
+						</li>
+					</c:when>
+				</c:choose>
+			</c:forEach>
+			<c:choose>
+				<c:when test="${pagination.nextPage <= pagination.lastPage}">
+					<li style="">
+						<a href="board/list?page=${pagination.nextPage}">▶</a>
+					</li>
+				</c:when>
+			</c:choose>
+		</ul>
+	</div>
 	<p><a href="/board/insert">글쓰기</a></p>
 	
 </body>
