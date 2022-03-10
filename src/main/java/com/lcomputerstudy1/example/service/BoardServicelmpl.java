@@ -1,5 +1,7 @@
 package com.lcomputerstudy1.example.service;
 import java.util.List;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lcomputerstudy1.example.domain.Board;
@@ -11,9 +13,9 @@ public class BoardServicelmpl implements BoardService{
 
 	@Autowired BoardMapper boardMapper;
 	
+	
 	@Override
 	public List<Board> selectBoardList(Pagination pagination){
-		
 		return boardMapper.selectBoardList(pagination);
 	}
 	@Override

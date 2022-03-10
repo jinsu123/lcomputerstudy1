@@ -1,8 +1,12 @@
 package com.lcomputerstudy1.example.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.lcomputerstudy1.example.service.BoardService;
+
 public class Pagination {
 	private int count; 
-	private int page;     
+	private int page=1;     
 	private int pageNum;  
 	private int startPage;
 	private int endPage; 
@@ -11,24 +15,22 @@ public class Pagination {
 	private int nextPage;
 	public static final int pageUnit=5;  
 	public static final int perPage=5;   
+	@Autowired BoardService boardService;
 	
+	public Pagination() {
+	}
 	
-	
-	public Pagination() {}
-	
-	public Pagination(int page, int count) {
-		this.page = page;
-		this.count = count;
-		this.pageNum = (page-1)*perPage;
-		
+	public void init() {		
+				
+		pageNum = (page-1)*5;
 		startPage =((page-1)/pageUnit)*pageUnit+1;
 		lastPage = (int)Math.ceil(count / (float)perPage);
 		endPage = startPage+pageUnit-1;
 		endPage = endPage < lastPage ? endPage : lastPage;
 		prevPage=(startPage-1);
 		nextPage=(startPage+pageUnit);
+		
 	}
-	
 	
 	public int getCount() {
 		return count;

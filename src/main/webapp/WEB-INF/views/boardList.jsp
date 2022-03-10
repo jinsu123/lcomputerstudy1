@@ -47,7 +47,7 @@ table{
 	<h1>게시판</h1>
 	<table>
 		<tr>
-			<td colspan="6">전체 게시글 수 : ${boardCount} </td>
+			<td colspan="6">전체 게시글 수 : ${pagination.count} </td>
 		<tr>
 			<th>번호</th>
 			<th style="width:10%">제목</th>
@@ -73,7 +73,7 @@ table{
 			<c:choose>
 				<c:when test="${pagination.prevPage >= 5 }">
 					<li>
-						<a href="board/list?page=${pagination.prevPage}">
+						<a href="/board/list?page=${pagination.prevPage}">
 							◀
 						</a>
 					</li>
@@ -88,7 +88,7 @@ table{
 					</c:when>
 					<c:when test="${pagination.page != i}">
 						<li>
-							<a href="board/list?page=${i}">${i}</a>
+							<a href="/board/list?page=${i}">${i}</a>
 						</li>
 					</c:when>
 				</c:choose>
@@ -96,7 +96,7 @@ table{
 			<c:choose>
 				<c:when test="${pagination.nextPage <= pagination.lastPage}">
 					<li style="">
-						<a href="board/list?page=${pagination.nextPage}">▶</a>
+						<a href="/board/list?page=${pagination.nextPage}">▶</a>
 					</li>
 				</c:when>
 			</c:choose>

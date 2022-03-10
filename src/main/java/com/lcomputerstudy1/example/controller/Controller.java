@@ -2,6 +2,8 @@ package com.lcomputerstudy1.example.controller;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lcomputerstudy1.example.domain.Board;
 import com.lcomputerstudy1.example.domain.Pagination;
@@ -26,6 +29,9 @@ public class Controller {
 	@Autowired UserService userservice;
 	@Autowired BoardService boardservice;
 	@Autowired PasswordEncoder passwordEncoder;
+	Pagination pagination;
+
+	
 	
 	@RequestMapping("/")
 	public String home(Model model, Pagination pagination) {
@@ -91,10 +97,12 @@ public class Controller {
 	public String boardList(Model model, Pagination pagination) {
 //		System.out.println("home");
 		
-		List<Board> list = boardservice.selectBoardList(pagination);
 		int boardCount = boardservice.boardCount();
+		pagination.setCount(boardCount);
+		pagination.init();
+		List<Board> list = boardservice.selectBoardList(pagination);
 		model.addAttribute("list", list);
-		model.addAttribute("boardCount", boardCount);
+		model.addAttribute("pagination", pagination);
 		return "/boardList";
 	}
 	
