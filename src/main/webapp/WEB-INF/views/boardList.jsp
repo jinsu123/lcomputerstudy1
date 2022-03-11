@@ -68,6 +68,21 @@ table{
 		</c:forEach>
 	</table>
 	
+	<div id="search">
+        <form action="/board/list" name="search.type" method="get">
+        	<input type="hidden" name="page" value="1">
+            <select name="type">
+            	<option value="0" selected>- 선택- </option>
+                <option value="1">제목</option>
+                <option value="2">내용</option>
+                <option value="3">제목+내용</option>
+                <option value="4">작성자</option>
+            </select>
+            <input type="text" size="20" name="keyword"/>&nbsp;
+            <input type="submit" value="검색"/>
+        </form>    
+	</div>
+	
 	<div>
 		<ul>
 			<c:choose>
