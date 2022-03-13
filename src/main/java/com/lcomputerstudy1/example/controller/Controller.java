@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lcomputerstudy1.example.domain.Board;
 import com.lcomputerstudy1.example.domain.Pagination;
+import com.lcomputerstudy1.example.domain.Search;
 import com.lcomputerstudy1.example.domain.User;
 import com.lcomputerstudy1.example.mapper.BoardMapper;
 import com.lcomputerstudy1.example.service.BoardService;

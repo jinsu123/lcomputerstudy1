@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcomputerstudy1.example.mapper.BoardMapper">
 	
+	<!-- sql code 조각  -->
+	<sql id="search">
+	<where>
+		<if test="type != null">
+			<if test="type == '1'">AND TITLE LIKE '%'|| #{keyword} || '%'</if>
+			<if test="type == '2'">AND CONTENT LIKE '%' || #{keyword} || '%'</if>
+			<if test="type == '3'">AND (TITLE LIKE '%' || #{keyword} || '%') OR (CONTENT LIKE '%' || #{keyword} || '%')</if>
+			<if test="type == '4'">AND WRITER LIKE '%' || #{keyword} || '%'</if>
+		</if>
+	</where>
+	</sql>
+
+
 	<!-- 게시판 리스트  -->
 	<select id="selectBoardList" resultType="Board">
 	  	      
@@ -16,8 +29,10 @@
 				                 tb.u_name
 				                 
 		  FROM	                 lc_board ta
+			  
 		  LEFT JOIN 		     lc_user tb ON ta.u_idx = tb.u_idx, 
 	               		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_board ta))tc
+ 			 
 		  LIMIT	          		 #{pageNum},5
 
 		       		
@@ -29,18 +44,12 @@
 	<select id="boardCount" resultType="int">
     	 SELECT			 COUNT(*) count 
     	 FROM 				lc_board
+   	 	<!-- WHERE절을 include 태그로 삽입  -->
+		<include refid="search"></include>    	 
 	</select> 
 
 
-	<!-- sql code 조각  -->
-	<sql id="search">
-		<if test="type != null">
-			<if test="type == '1'">AND TITLE LIKE "%" || #{keyword} || "%"</if>
-			<if test="type == '2'">AND CONTENT LIKE "%" || #{keyword} || "%"</if>
-			<if test="type == '3'">AND (TITLE LIKE "%" || #{keyword} || "%") OR (CONTENT LIKE "%" || #{keyword} || "%")</if>
-			<if test="type == '4'">AND WRITER LIKE "%" || #{keyword} || "%"</if>
-		</if>
-	</sql>
+
 	
 
 
