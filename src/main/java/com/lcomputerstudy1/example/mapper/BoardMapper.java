@@ -12,4 +12,8 @@ public interface BoardMapper {
 	public int boardCount();
 
 	public Board boardDetail(Board board);
+	
+	public Board boardInsert(Board board);
+	
+	public Board insertProcess(Board board);
 }

@@ -11,4 +11,8 @@ public interface BoardService {
 	
 	public Board boardDetail(Board board);
 	
+	public Board boardInsert(Board board);
+	
+	public Board insertProcess(Board board);
+	
 }

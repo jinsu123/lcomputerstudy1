@@ -6,13 +6,20 @@ public class Board {
 	private String bContent;
 	private String bWriter;
 	private String bDatetime;
-	private int bViewCount;
+	private int bViewcount;
+	User user;
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int getbViewCount() {
-		return bViewCount;
+		return bViewcount;
 	}
 	public void setbViewCount(int bViewCount) {
-		this.bViewCount = bViewCount;
+		this.bViewcount = bViewCount;
 	}
 	public int getbId() {
 		return bId;

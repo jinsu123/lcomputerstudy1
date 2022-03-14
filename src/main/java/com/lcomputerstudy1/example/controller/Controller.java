@@ -111,7 +111,7 @@ public class Controller {
 	public String boardDetail(Model model, Board board) {
 		
 		board = boardservice.boardDetail(board);
-		
+	
 		model.addAttribute("board", board);
 		
 		return "/boardDetail";
@@ -119,11 +119,21 @@ public class Controller {
 	
 	
 	@RequestMapping("/board/insert")
-	public String boardInsert(Model model) {
+	public String boardInsert(Model model, Board board) {
 		
-		
-		
+		board = boardservice.boardInsert(board);
+		model.addAttribute("board", board);	
 		return "/insert";
+	}
+	
+
+	@RequestMapping("/board/insertProcess")
+	public String insertProcess(Model model, Board board) {
+		
+		board = boardservice.insertProcess(board);
+		
+		model.addAttribute("board", board);	
+		return "/insertProcess";
 	}
 	
 	

@@ -52,7 +52,7 @@
 
 	<!-- 게시판 상세보기  -->
 	<select id="boardDetail" resultType="Board" parameterType="Board">
-		select * ,
+		select
 					ta.b_id as bId,
 									                 ta.b_title as bTitle,
 									                 ta.b_content as bContent,
@@ -60,14 +60,41 @@
 									                 ta.b_datetime as bDatetime,
 									                 ta.b_viewcount as bViewcount,
 									                 tb.u_id,
-									                 tb.u_name
+									                 tb.u_name,
+									                 tb.u_idx
 		from lc_board ta 
 		left join lc_user tb on ta.u_idx= tb.u_idx 
 		where b_id=#{bId}	  	      
 
-	   </select>
+	  </select>
+
+	<!-- 게시판 등록  -->
+	<select id="boardInsert" resultType="Board" parameterType="Board">
+		select
+					ta.b_id as bId,
+									                 ta.b_title as bTitle,
+									                 ta.b_content as bContent,
+									                 ta.b_writer as bWriter,
+									                 ta.b_datetime as bDatetime,
+									                 ta.b_viewcount as bViewcount,
+									                 tb.u_id,
+									                 tb.u_name,
+									                 tb.u_idx
+		from lc_board ta 
+		left join lc_user tb on ta.u_idx= tb.u_idx 
+		where b_id=#{bId}	  	      
+
+	  </select>
 
 
+	<!-- 게시판 등록하기  -->
+	<select id="insertProcess" resultType="Board" parameterType="Board">
+	  	      
+	insert into lc_board( b_title, b_content,  b_writer, b_viewcount)
+	 VALUES(#{bTitle},#{bContent},#{bWriter}, #{bViewcount})
+	
+	
+	</select>
 	
 
 
