@@ -11,4 +11,5 @@ public interface BoardMapper {
 	
 	public int boardCount();
 
+	public Board boardDetail(Board board);
 }

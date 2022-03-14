@@ -9,4 +9,6 @@ public interface BoardService {
 
 	public int boardCount();
 	
+	public Board boardDetail(Board board);
+	
 }

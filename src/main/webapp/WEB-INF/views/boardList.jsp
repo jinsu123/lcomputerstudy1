@@ -59,7 +59,7 @@ table{
 		<c:forEach items="${list}" var="list">
 			<tr>
 				<td>${list.bId}</td>
-				<td>${list.bTitle}</td>
+				<td><a href="/board/detail?bId=${list.bId}">${list.bTitle}</a></td>
 				<td>${list.bContent}</td>
 				<td>${list.bWriter}</td>
 				<td>${list.bDatetime}</td>

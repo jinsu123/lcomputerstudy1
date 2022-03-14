@@ -107,6 +107,24 @@ public class Controller {
 		return "/boardList";
 	}
 	
+	@RequestMapping("/board/detail")
+	public String boardDetail(Model model, Board board) {
+		
+		board = boardservice.boardDetail(board);
+		
+		model.addAttribute("board", board);
+		
+		return "/boardDetail";
+	}
+	
+	
+	@RequestMapping("/board/insert")
+	public String boardInsert(Model model) {
+		
+		
+		
+		return "/insert";
+	}
 	
 	
 }

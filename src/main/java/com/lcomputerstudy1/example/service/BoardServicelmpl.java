@@ -24,4 +24,9 @@ public class BoardServicelmpl implements BoardService{
 	}
 	
 	
+	@Override
+	public Board boardDetail(Board board){
+		return boardMapper.boardDetail(board);
+	}
+	
 }
