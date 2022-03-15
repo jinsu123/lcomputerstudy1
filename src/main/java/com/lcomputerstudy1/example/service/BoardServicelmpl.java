@@ -29,10 +29,6 @@ public class BoardServicelmpl implements BoardService{
 		return boardMapper.boardDetail(board);
 	}
 	
-	@Override
-	public Board boardInsert(Board board){
-		return boardMapper.boardInsert(board);
-	}
 	
 	@Override
 	public Board insertProcess(Board board){

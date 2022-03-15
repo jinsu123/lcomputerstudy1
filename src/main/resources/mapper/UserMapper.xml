@@ -26,6 +26,7 @@
    <!-- 회원 등록 -->
    <insert id="createUser" parameterType="User">
       INSERT INTO lc_user (
+         u_idx,
          u_id,
          u_password,
          u_name,
@@ -34,6 +35,7 @@
          u_isCredentialNonExpired,
          u_isEnabled
       ) VALUES (
+         #{u_idx},
          #{username},
          #{password},
          #{uName},

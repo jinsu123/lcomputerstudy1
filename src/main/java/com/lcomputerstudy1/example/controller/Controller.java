@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +23,7 @@ import com.lcomputerstudy1.example.domain.User;
 import com.lcomputerstudy1.example.mapper.BoardMapper;
 import com.lcomputerstudy1.example.service.BoardService;
 import com.lcomputerstudy1.example.service.UserService;
+import com.mysql.cj.Session;
 
 
 @org.springframework.stereotype.Controller
@@ -30,9 +32,6 @@ public class Controller {
 	@Autowired UserService userservice;
 	@Autowired BoardService boardservice;
 	@Autowired PasswordEncoder passwordEncoder;
-	Pagination pagination;
-
-	
 	
 	@RequestMapping("/")
 	public String home(Model model, Pagination pagination) {
@@ -119,17 +118,17 @@ public class Controller {
 	
 	
 	@RequestMapping("/board/insert")
-	public String boardInsert(Model model, Board board) {
+	public String boardInsert(Model model) {
 		
-		board = boardservice.boardInsert(board);
-		model.addAttribute("board", board);	
 		return "/insert";
 	}
 	
 
 	@RequestMapping("/board/insertProcess")
-	public String insertProcess(Model model, Board board) {
+	public String insertProcess(Model model, Board board , Authentication authentication) {
 		
+		User user = (User)authentication.getPrincipal();
+		board.setUser(user);
 		board = boardservice.insertProcess(board);
 		
 		model.addAttribute("board", board);	
