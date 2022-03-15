@@ -13,14 +13,17 @@ public class User implements UserDetails{
 	private String password;
 	private String uName;
 	private String uDateTime;
-	private int u_idx;
+	private int uIdx;
 	
-	public int getU_idx() {
-		return u_idx;
+
+
+
+	public int getuIdx() {
+		return uIdx;
 	}
 
-	public void setU_idx(int u_idx) {
-		this.u_idx = u_idx;
+	public void setuIdx(int uIdx) {
+		this.uIdx = uIdx;
 	}
 
 	private Collection<? extends GrantedAuthority> authorities;
@@ -73,6 +76,8 @@ public class User implements UserDetails{
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
 	}
+	
+	
 	@Override
 	public String getPassword() {
 		return password;

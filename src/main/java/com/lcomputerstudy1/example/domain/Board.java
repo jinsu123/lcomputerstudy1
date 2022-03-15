@@ -7,17 +7,18 @@ public class Board {
 	private String bWriter;
 	private String bDatetime;
 	private int bViewcount;
-	private int u_idx;
-	User user;
+	private int uIdx;
 	
 	
-	public int getU_idx() {
-		return u_idx;
+	public int getuIdx() {
+		return uIdx;
 	}
-
-	public void setU_idx(int u_idx) {
-		this.u_idx = u_idx;
+	public void setuIdx(int uIdx) {
+		this.uIdx = uIdx;
 	}
+	private User user;
+	
+	
 	
 	
 	public User getUser() {

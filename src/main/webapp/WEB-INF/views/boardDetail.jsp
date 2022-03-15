@@ -65,7 +65,7 @@
 
 	<tr style="height:50px;">
 		<td style="border:none;">
-			<p style="width:5%; font-weight:700;background-color:#818181;color:#fff;">수정</p>
+			<p style="width:5%; font-weight:700;background-color:#818181;color:#fff;"><a href="/board/edit?bId=${board.bId }">수정</a></p>
 		</td>
 		<td style="border:none;">
 			<p style="width:5%; font-weight:700;background-color:red;color:#fff;">삭제</p>

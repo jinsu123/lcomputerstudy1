@@ -21,7 +21,6 @@ public class UserServicelmpl implements UserService{
 		user.setAuthorities(getAuthoritites(username));
 
 
-		
 		return user;
 	}
 	

@@ -50,7 +50,7 @@ public class Controller {
 	}
 	
 	@RequestMapping("/signup")
-	public String signup(User user) {
+	public String signup(User user, String username) {
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 //		System.out.println("home1");
 		user.setPassword(encodedPassword);
@@ -63,7 +63,6 @@ public class Controller {
 		userservice.createUser(user);
 //		System.out.println("home3");
 		userservice.createAuthorities(user);
-		
 		
 		return "/login";
 	}
@@ -129,12 +128,19 @@ public class Controller {
 		
 		User user = (User)authentication.getPrincipal();
 		board.setUser(user);
+		board.setuIdx(user.getuIdx());
 		board = boardservice.insertProcess(board);
 		
 		model.addAttribute("board", board);	
 		return "/insertProcess";
 	}
 	
+	
+	@RequestMapping("/board/edit")
+	public String boardedit(Model model) {
+		
+		return "/edit";
+	}
 	
 }
 	

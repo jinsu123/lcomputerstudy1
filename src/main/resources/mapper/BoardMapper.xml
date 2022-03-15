@@ -75,7 +75,7 @@
 	<select id="insertProcess" resultType="Board" parameterType="Board">
 	  	      
 	insert into lc_board( b_title, b_content, b_writer, b_viewcount ,u_idx)
-	 VALUES(#{bTitle}, #{bContent}, #{bWriter}, #{bViewcount}, #{u_idx} )
+	 VALUES(#{bTitle}, #{bContent}, #{bWriter}, #{bViewcount}, #{uIdx} )
 	
 	
 	</select>

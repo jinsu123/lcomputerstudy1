@@ -11,7 +11,8 @@
 
    <!-- 회원 불러오기 -->
    <select id="readUser" parameterType="String" resultType="User">
-      SELECT         u_id                 						    as   username,
+      SELECT         		 u_idx										as uIdx,
+      						 u_id                 						as  username,
 			                 u_password             					as password,
 			                 u_name                						as   uName,
 			                 u_isAccountNonExpired        as isAccountNonExpired,
@@ -26,7 +27,7 @@
    <!-- 회원 등록 -->
    <insert id="createUser" parameterType="User">
       INSERT INTO lc_user (
-         u_idx,
+    
          u_id,
          u_password,
          u_name,
@@ -35,7 +36,7 @@
          u_isCredentialNonExpired,
          u_isEnabled
       ) VALUES (
-         #{u_idx},
+      
          #{username},
          #{password},
          #{uName},
