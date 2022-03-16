@@ -11,7 +11,7 @@ public class Pagination {
 	private int nextPage;
 	public static final int pageUnit=5;  
 	public static final int perPage=5;   
-	Search search;
+	private Search search;
 
 	public Pagination() {
 	}

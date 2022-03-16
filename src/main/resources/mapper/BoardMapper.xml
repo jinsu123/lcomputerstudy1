@@ -5,11 +5,11 @@
 	<!-- sql code 조각  -->
 	<sql id="search">
 	<where>
-		<if test="type != null">
-			<if test="type == '1'">AND TITLE LIKE '%'|| #{keyword} || '%'</if>
-			<if test="type == '2'">AND CONTENT LIKE '%' || #{keyword} || '%'</if>
-			<if test="type == '3'">AND (TITLE LIKE '%' || #{keyword} || '%') OR (CONTENT LIKE '%' || #{keyword} || '%')</if>
-			<if test="type == '4'">AND WRITER LIKE '%' || #{keyword} || '%'</if>
+		<if test="Search.type != null and  Search.type !=''">
+			<if test="Search.type == '1'"> b_title LIKE CONCAT('%',#{keyword},'%')</if>
+			<if test="Search.type == '2'">AND b_content LIKE CONCAT('%', #{keyword} ,'%')</if>
+			<if test="Search.type == '3'">AND b_title LIKE CONCAT('%',#{keyword},'%') OR b_content LIKE CONCAT('%', #{keyword} ,'%')</if>
+			<if test="Search.type == '4'">AND b_writer LIKE CONCAT('%' , #{keyword} ,'%')</if>
 		</if>
 	</where>
 	</sql>
@@ -33,6 +33,7 @@
 			  
 		  LEFT JOIN 		     lc_user tb ON ta.u_idx = tb.u_idx, 
 	               		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_board ta))tc
+	      <include refid="search"></include>        		 
  		  ORDER BY				bId desc	 
 		  LIMIT	          		 #{pageNum},5
 

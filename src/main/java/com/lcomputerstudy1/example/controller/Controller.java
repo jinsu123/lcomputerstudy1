@@ -93,12 +93,13 @@ public class Controller {
 	}
 	
 	@RequestMapping("/board/list")
-	public String boardList(Model model, Pagination pagination) {
+	public String boardList(Model model, Pagination pagination ) {
 //		System.out.println("home");
-		
+		int type = search(type);
 		int boardCount = boardservice.boardCount();
 		pagination.setCount(boardCount);
 		pagination.init();
+		pagination.setSearch(type);
 		List<Board> list = boardservice.selectBoardList(pagination);
 		model.addAttribute("list", list);
 		model.addAttribute("pagination", pagination);
