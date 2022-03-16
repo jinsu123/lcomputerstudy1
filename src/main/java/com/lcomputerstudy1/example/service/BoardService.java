@@ -13,4 +13,13 @@ public interface BoardService {
 	
 	public Board insertProcess(Board board);
 	
+	public Board editBoard(Board board);
+	
+	public Board editProcessBoard(Board board);
+
+	public Board boardDelete(Board board);
+	
+	public Board boardViewCount(Board board);
+
 }
+

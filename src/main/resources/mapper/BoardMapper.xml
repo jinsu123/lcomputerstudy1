@@ -33,7 +33,7 @@
 			  
 		  LEFT JOIN 		     lc_user tb ON ta.u_idx = tb.u_idx, 
 	               		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_board ta))tc
- 			 
+ 		  ORDER BY				bId desc	 
 		  LIMIT	          		 #{pageNum},5
 
 		       		
@@ -80,7 +80,45 @@
 	
 	</select>
 	
+	
+	<!-- 게시판 불러오기  -->
+	<select id="editBoard" resultType="Board" parameterType="Board">
+		select
+					 	  b_id as bId,
+			              b_title as bTitle,
+			              b_content as bContent,
+			              b_writer as bWriter,
+			              b_datetime as bDatetime,
+			              b_viewcount as bViewcount
+			              
+		from lc_board 
+		where b_id=#{bId}	  	      
 
+	  </select>
 
+	<!-- 게시판 수정작업  -->
+	<select id="editProcessBoard" resultType="Board" parameterType="Board">
+		UPDATE lc_board 
+		SET b_title = #{bTitle} , b_content = #{bContent} , b_datetime = now()
+		WHERE b_id = #{bId}
+			  	      
+
+	  </select>
+	  
+	  
+	  
+	<!-- 게시판 삭제하기  -->
+	<select id="boardDelete" resultType="Board" parameterType="Board">
+		DELETE from lc_board 
+		WHERE b_id = #{bId}
+
+	  </select>
+
+	<!-- 게시판 조회수 증가  -->
+	<select id="boardViewCount" resultType="Board" parameterType="Board">
+		UPDATE lc_board SET b_viewcount = b_viewcount+1  
+		WHERE b_id = #{bId}
+
+	  </select>
 
 </mapper>

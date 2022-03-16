@@ -8,5 +8,8 @@
 </head>
 <body>
 
+<h2>삭제 완료</h2>
+<a href="/board/list">리스트로 돌아가기</a>
+
 </body>
 </html>

@@ -108,6 +108,7 @@ public class Controller {
 	@RequestMapping("/board/detail")
 	public String boardDetail(Model model, Board board) {
 		
+		boardservice.boardViewCount(board);
 		board = boardservice.boardDetail(board);
 	
 		model.addAttribute("board", board);
@@ -131,15 +132,34 @@ public class Controller {
 		board.setuIdx(user.getuIdx());
 		board = boardservice.insertProcess(board);
 		
-		model.addAttribute("board", board);	
 		return "/insertProcess";
 	}
 	
 	
 	@RequestMapping("/board/edit")
-	public String boardedit(Model model) {
+	public String boardedit(Model model, Board board) {
 		
+		board = boardservice.editBoard(board);
+		
+		model.addAttribute("board", board);
 		return "/edit";
+	}
+
+	@RequestMapping("/board/editProcess")
+	public String eidtProcess(Model model, Board board) {
+		
+		
+		boardservice.editProcessBoard(board);
+		
+		return "/editProcess";
+	}
+	
+	@RequestMapping("/board/delete")
+	public String boardDelete(Model model, Board board) {
+		
+		boardservice.boardDelete(board);
+		
+		return "/delete";
 	}
 	
 }

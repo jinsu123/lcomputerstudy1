@@ -35,4 +35,23 @@ public class BoardServicelmpl implements BoardService{
 		return boardMapper.insertProcess(board);
 	}
 	
+	@Override
+	public Board editBoard(Board board){
+		return boardMapper.editBoard(board);
+	}	
+	
+	@Override
+	public Board editProcessBoard(Board board){
+		return boardMapper.editProcessBoard(board);
+	}
+	
+	@Override
+	public Board boardDelete(Board board){
+		return boardMapper.boardDelete(board);
+	}	
+
+	@Override
+	public Board boardViewCount(Board board){
+		return boardMapper.boardViewCount(board);
+	}	
 }
