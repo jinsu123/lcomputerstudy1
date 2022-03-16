@@ -18,7 +18,7 @@
 		<p>파일: <input type="file"  name="upload1"></p>
 		<p>파일: <input type="file"  name="upload2"></p>
 		<hr width="40%" align="left">
-		<p> <input type="submit" value="수정완료">
+		<p> <input type="submit" value="수정완료"><input type="button" onclick="location.href='/board/detail?bId=${board.bId}'" value="돌아가기">
 	</form>	
 
 

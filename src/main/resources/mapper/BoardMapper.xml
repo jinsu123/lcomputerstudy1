@@ -60,9 +60,9 @@
 			              ta.b_writer as bWriter,
 			              ta.b_datetime as bDatetime,
 			              ta.b_viewcount as bViewcount,
-			              tb.u_id,
-			              tb.u_name,
-			              tb.u_idx
+			              tb.u_id as username,
+			              tb.u_name as uName,
+			              tb.u_idx as uIdx
 		from lc_board ta 
 		left join lc_user tb on ta.u_idx= tb.u_idx 
 		where b_id=#{bId}	  	      
