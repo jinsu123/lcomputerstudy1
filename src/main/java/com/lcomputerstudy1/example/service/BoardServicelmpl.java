@@ -19,8 +19,8 @@ public class BoardServicelmpl implements BoardService{
 		return boardMapper.selectBoardList(pagination);
 	}
 	@Override
-	public int boardCount() {
-		return boardMapper.boardCount();
+	public int boardCount(Pagination pagination) {
+		return boardMapper.boardCount(pagination);
 	}
 	
 	

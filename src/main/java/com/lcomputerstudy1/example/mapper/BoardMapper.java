@@ -9,7 +9,7 @@ import com.lcomputerstudy1.example.domain.Pagination;
 public interface BoardMapper {
 	public List<Board> selectBoardList(Pagination pagination);
 	
-	public int boardCount();
+	public int boardCount(Pagination pagination);
 
 	public Board boardDetail(Board board);
 	

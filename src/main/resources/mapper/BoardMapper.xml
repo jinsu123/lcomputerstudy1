@@ -3,13 +3,13 @@
 <mapper namespace="com.lcomputerstudy1.example.mapper.BoardMapper">
 	
 	<!-- sql code 조각  -->
-	<sql id="search">
+	<sql id="Search">
 	<where>
-		<if test="Search.type != null and  Search.type !=''">
-			<if test="Search.type == '1'"> b_title LIKE CONCAT('%',#{keyword},'%')</if>
-			<if test="Search.type == '2'">AND b_content LIKE CONCAT('%', #{keyword} ,'%')</if>
-			<if test="Search.type == '3'">AND b_title LIKE CONCAT('%',#{keyword},'%') OR b_content LIKE CONCAT('%', #{keyword} ,'%')</if>
-			<if test="Search.type == '4'">AND b_writer LIKE CONCAT('%' , #{keyword} ,'%')</if>
+		<if test="search != null and  search.type !=''">
+			<if test="search.type == 1"> b_title LIKE CONCAT('%',#{search.keyword},'%')</if>
+			<if test="search.type == 2">AND b_content LIKE CONCAT('%', #{search.keyword} ,'%')</if>
+			<if test="search.type == 3">AND b_title LIKE CONCAT('%',#{search.keyword},'%') OR b_content LIKE CONCAT('%', #{search.keyword} ,'%')</if>
+			<if test="search.type == 4">AND b_writer LIKE CONCAT('%' , #{search.keyword} ,'%')</if>
 		</if>
 	</where>
 	</sql>
@@ -33,7 +33,7 @@
 			  
 		  LEFT JOIN 		     lc_user tb ON ta.u_idx = tb.u_idx, 
 	               		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_board ta))tc
-	      <include refid="search"></include>        		 
+ 		 <include refid="Search"></include> 
  		  ORDER BY				bId desc	 
 		  LIMIT	          		 #{pageNum},5
 
@@ -46,8 +46,7 @@
 	<select id="boardCount" resultType="int">
     	 SELECT			 COUNT(*) count 
     	 FROM 				lc_board
-   	 	<!-- WHERE절을 include 태그로 삽입  -->
-		<include refid="search"></include>    	 
+	  	<include refid="Search"></include>
 	</select> 
 
 
