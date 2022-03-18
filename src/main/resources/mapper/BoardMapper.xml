@@ -22,12 +22,11 @@
 	                     ta.b_id as bId,
 				                 ta.b_title as bTitle,
 				                 ta.b_content as bContent,
-				                 ta.b_writer as bWriter,
 				                 ta.b_datetime as bDatetime,
 				                 ta.b_viewcount as bViewcount,
-				                 tb.u_id,
-				                 tb.u_name,
-				                 tb.u_idx
+				                 tb.u_id as username,
+				                 tb.u_name as uName,
+				                 tb.u_idx as uIdx
 				                 
 		  FROM	                 lc_board ta
 			  
@@ -57,7 +56,6 @@
 					 	  ta.b_id as bId,
 			              ta.b_title as bTitle,
 			              ta.b_content as bContent,
-			              ta.b_writer as bWriter,
 			              ta.b_datetime as bDatetime,
 			              ta.b_viewcount as bViewcount,
 			              tb.u_id as username,
@@ -72,13 +70,13 @@
 
 
 	<!-- 게시판 등록하기  -->
-	<select id="insertProcess" resultType="Board" parameterType="Board">
+	<insert id="insertProcess"  parameterType="Board">
 	  	      
-	insert into lc_board( b_title, b_content, b_writer, b_viewcount ,u_idx)
-	 VALUES(#{bTitle}, #{bContent}, #{bWriter}, #{bViewcount}, #{uIdx} )
+	insert into lc_board( b_title, b_content,  b_viewcount ,u_idx)
+	 VALUES(#{bTitle}, #{bContent},  #{bViewcount}, #{uIdx} )
 	
 	
-	</select>
+	</insert>
 	
 	
 	<!-- 게시판 불러오기  -->
@@ -97,28 +95,44 @@
 	  </select>
 
 	<!-- 게시판 수정작업  -->
-	<select id="editProcessBoard" resultType="Board" parameterType="Board">
+	<update id="editProcessBoard"  parameterType="Board">
 		UPDATE lc_board 
 		SET b_title = #{bTitle} , b_content = #{bContent} , b_datetime = now()
 		WHERE b_id = #{bId}
-			  	      
 
-	  </select>
+	  </update>
 	  
 	  
 	  
 	<!-- 게시판 삭제하기  -->
-	<select id="boardDelete" resultType="Board" parameterType="Board">
+	<delete id="boardDelete" parameterType="Board" >
 		DELETE from lc_board 
 		WHERE b_id = #{bId}
 
-	  </select>
+	  </delete>
 
 	<!-- 게시판 조회수 증가  -->
-	<select id="boardViewCount" resultType="Board" parameterType="Board">
+	<update id="boardViewCount"  parameterType="Board">
 		UPDATE lc_board SET b_viewcount = b_viewcount+1  
 		WHERE b_id = #{bId}
 
-	  </select>
+	  </update>
 
+
+
+	<!--  Result Map 선언 -->
+	<resultMap type="Board" id="boardResult">
+		<id column="b_id" property="bId"/>
+		<result column="b_title" property="bTitle"/>
+		<result column="b_content" property="bContent"/>
+		<result column="b_datetime" property="bDatetime"/>
+		<result column="b_viewcount" property="bViewcount"/>
+	</resultMap>
+	
+	<resultMap type="User" id="userResult">
+		<id column="u_id" property="username"/>
+		<result column="u_name" property="uName"/>
+		<result column="u_idx" property="uIdx"/>
+	</resultMap>
+	
 </mapper>

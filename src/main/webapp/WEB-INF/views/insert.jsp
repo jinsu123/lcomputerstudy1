@@ -13,7 +13,7 @@
 	<sec:authentication property="principal" var="principal"/>
 	<form action="/board/insertProcess" name="board" method="post">
 	
-		<p> 작성자 : <input type="text" value="${principal.uName}" name="bWriter" readonly></p>
+		<p> 작성자 : ${principal.uName}</p>
 		<p> 제   목 : <input type="text" maxlength="100" size="40" name="bTitle" placeholder="제목을 작성해주세요.">
 		<p> <div style="text-align:middle">내   용 :</div><textarea  style="overflow:auto; height:150px; resize:none;"  cols="100	" rows="100" name="bContent" placeholder="내용을 작성해주세요."></textarea>
 		<p>파일: <input type="file"  name="upload1"></p>

@@ -13,13 +13,13 @@ public interface BoardMapper {
 
 	public Board boardDetail(Board board);
 	
-	public Board insertProcess(Board board);
+	public void insertProcess(Board board);
 	
 	public Board editBoard(Board board);
 	
-	public Board editProcessBoard(Board board);
+	public void editProcessBoard(Board board);
 
-	public Board boardDelete(Board board);
+	public void boardDelete(Board board);
 
-	public Board boardViewCount(Board board);
+	public void boardViewCount(Board board);
 }

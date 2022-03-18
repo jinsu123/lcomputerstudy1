@@ -8,8 +8,15 @@ public class Board {
 	private String bDatetime;
 	private int bViewcount;
 	private int uIdx;
+	private int ROWNUM;
 	
 	
+	public int getROWNUM() {
+		return ROWNUM;
+	}
+	public void setROWNUM(int rOWNUM) {
+		ROWNUM = rOWNUM;
+	}
 	public int getuIdx() {
 		return uIdx;
 	}

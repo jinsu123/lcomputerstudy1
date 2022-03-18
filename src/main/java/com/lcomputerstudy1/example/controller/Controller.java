@@ -130,7 +130,7 @@ public class Controller {
 		User user = (User)authentication.getPrincipal();
 		board.setUser(user);
 		board.setuIdx(user.getuIdx());
-		board = boardservice.insertProcess(board);
+		boardservice.insertProcess(board);
 		
 		return "/insertProcess";
 	}

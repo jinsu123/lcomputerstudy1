@@ -31,8 +31,8 @@ public class BoardServicelmpl implements BoardService{
 	
 	
 	@Override
-	public Board insertProcess(Board board){
-		return boardMapper.insertProcess(board);
+	public void insertProcess(Board board){
+		 boardMapper.insertProcess(board);
 	}
 	
 	@Override
@@ -41,17 +41,17 @@ public class BoardServicelmpl implements BoardService{
 	}	
 	
 	@Override
-	public Board editProcessBoard(Board board){
-		return boardMapper.editProcessBoard(board);
+	public void editProcessBoard(Board board){
+		 boardMapper.editProcessBoard(board);
 	}
 	
 	@Override
-	public Board boardDelete(Board board){
-		return boardMapper.boardDelete(board);
+	public void boardDelete(Board board){
+		boardMapper.boardDelete(board);
 	}	
 
 	@Override
-	public Board boardViewCount(Board board){
-		return boardMapper.boardViewCount(board);
+	public void boardViewCount(Board board){
+		boardMapper.boardViewCount(board);
 	}	
 }

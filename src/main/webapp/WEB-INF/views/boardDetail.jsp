@@ -51,7 +51,7 @@
 	</tr>
 	<tr>
 		<td>작성자</td>
-		<td style="width:70%">${board.bWriter}</td>
+		<td style="width:70%">${board.user.uName}</td>
 	</tr>
 	<tr>
 		<td>날짜</td>

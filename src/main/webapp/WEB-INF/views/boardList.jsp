@@ -60,10 +60,10 @@ table{
 		</tr>
 		<c:forEach items="${list}" var="list">
 			<tr>
-				<td>${list.bId}</td>
+				<td>${list.ROWNUM}</td>
 				<td><a href="/board/detail?bId=${list.bId}">${list.bTitle}</a></td>
 				<td>${list.bContent}</td>
-				<td>${list.bWriter}</td>
+				<td>${list.user.uName}</td>
 				<td>${list.bDatetime}</td>
 				<td>${list.bViewCount}</td>
 			</tr>
