@@ -14,31 +14,25 @@
 	</where>
 	</sql>
 
+	<!--  Result Map 선언 -->
+	
+	<resultMap type="User" id="User">
+			<result column="u_idx" property="uIdx"/>
+			<result column="u_id" property="username"/>
+			<result column="u_name" property="uName"/>
+	</resultMap>
+	
+	<resultMap type="Board" id="boardResultMap">
+		<result column="b_id" property="bId"/>
+		<result column="b_title" property="bTitle"/>
+		<result column="b_content" property="bContent"/>
+		<result column="b_datetime" property="bDatetime"/>
+		<result column="b_viewcount" property="bViewcount"/>
+		<result column="rownum" property="ROWNUM"/>
+		<association  property="user" resultMap="User"/>
+	</resultMap>
 
-	<!-- 게시판 리스트  -->
-	<select id="selectBoardList" resultType="Board">
-	  	      
-	      SELECT                   @ROWNUM := @ROWNUM -1 AS ROWNUM,
-	                     ta.b_id as bId,
-				                 ta.b_title as bTitle,
-				                 ta.b_content as bContent,
-				                 ta.b_datetime as bDatetime,
-				                 ta.b_viewcount as bViewcount,
-				                 tb.u_id as username,
-				                 tb.u_name as uName,
-				                 tb.u_idx as uIdx
-				                 
-		  FROM	                 lc_board ta
-			  
-		  LEFT JOIN 		     lc_user tb ON ta.u_idx = tb.u_idx, 
-	               		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_board ta))tc
- 		 <include refid="Search"></include> 
- 		  ORDER BY				bId desc	 
-		  LIMIT	          		 #{pageNum},5
 
-		       		
-
-	   </select>
 
 
 	<!-- 게시글 수  -->
@@ -51,16 +45,12 @@
 
 
 	<!-- 게시판 상세보기  -->
-	<select id="boardDetail" resultType="Board" parameterType="Board">
+	<select id="boardDetail" resultMap="boardResultMap" parameterType="Board">
 		select
-					 	  ta.b_id as bId,
-			              ta.b_title as bTitle,
-			              ta.b_content as bContent,
-			              ta.b_datetime as bDatetime,
-			              ta.b_viewcount as bViewcount,
-			              tb.u_id as username,
-			              tb.u_name as uName,
-			              tb.u_idx as uIdx
+					 	  ta.*,
+			              tb.u_id ,
+			              tb.u_name,
+			              tb.u_idx 
 		from lc_board ta 
 		left join lc_user tb on ta.u_idx= tb.u_idx 
 		where b_id=#{bId}	  	      
@@ -118,21 +108,22 @@
 
 	  </update>
 
+	<!-- 게시판 리스트  -->
+	<select id="selectBoardList" parameterType="Board" resultMap="boardResultMap" >
+	  	      
+	      SELECT                   @ROWNUM := @ROWNUM -1 AS ROWNUM,
+	                     ta.*, tb.u_id, tb.u_name, tb.u_idx
+				                 
+		  FROM	                 lc_board ta
+			  
+		  LEFT JOIN 		     lc_user tb ON ta.u_idx = tb.u_idx, 
+	               		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_board ta))tc
+ 		 <include refid="Search"></include> 
+		  LIMIT	          		 #{pageNum},5
+
+		       		
+
+	   </select>
 
 
-	<!--  Result Map 선언 -->
-	<resultMap type="Board" id="boardResult">
-		<id column="b_id" property="bId"/>
-		<result column="b_title" property="bTitle"/>
-		<result column="b_content" property="bContent"/>
-		<result column="b_datetime" property="bDatetime"/>
-		<result column="b_viewcount" property="bViewcount"/>
-	</resultMap>
-	
-	<resultMap type="User" id="userResult">
-		<id column="u_id" property="username"/>
-		<result column="u_name" property="uName"/>
-		<result column="u_idx" property="uIdx"/>
-	</resultMap>
-	
 </mapper>

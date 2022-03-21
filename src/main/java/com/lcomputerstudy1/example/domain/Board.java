@@ -9,6 +9,8 @@ public class Board {
 	private int bViewcount;
 	private int uIdx;
 	private int ROWNUM;
+	private User user;	
+	
 	
 	
 	public int getROWNUM() {
@@ -23,9 +25,7 @@ public class Board {
 	public void setuIdx(int uIdx) {
 		this.uIdx = uIdx;
 	}
-	private User user;
-	
-	
+
 	
 	
 	public User getUser() {
