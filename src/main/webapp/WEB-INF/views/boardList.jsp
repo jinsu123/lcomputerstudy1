@@ -119,7 +119,7 @@ table{
 			</c:choose>
 		</ul>
 	</div>
-	<p><a href="/board/insert">글쓰기</a></p>
+	<p><a href="/board/insert?b_group=0&b_order=0&b_depth=0">글쓰기</a></p>
 	
 </body>
 </html>

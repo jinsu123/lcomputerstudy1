@@ -29,6 +29,9 @@
 		<result column="b_datetime" property="bDatetime"/>
 		<result column="b_viewcount" property="bViewcount"/>
 		<result column="rownum" property="ROWNUM"/>
+		<result column="b_group" property="bGroup"/>
+		<result column="b_order" property="bOrder"/>
+		<result column="b_depth" property="bDepth"/>
 		<association  property="user" resultMap="User"/>
 	</resultMap>
 
@@ -62,11 +65,21 @@
 	<!-- 게시판 등록하기  -->
 	<insert id="insertProcess"  parameterType="Board">
 	  	      
-	insert into lc_board( b_title, b_content,  b_viewcount ,u_idx)
-	 VALUES(#{bTitle}, #{bContent},  #{bViewcount}, #{uIdx} )
-	
+		insert into lc_board( b_title, b_content,  b_viewcount ,u_idx, b_group, b_order, b_depth)
+		VALUES(#{bTitle}, #{bContent},  #{bViewcount}, #{uIdx} , #{bGroup}, #{bOrder}, #{bDepth})
+		  	<selectKey keyProperty="bId" resultType="int" order="AFTER">
+	    		SELECT LAST_INSERT_ID()
+	  		</selectKey>
 	
 	</insert>
+	
+	<update id="updateGroup"  parameterType="Board">
+	
+			UPDATE lc_board SET b_group = last_insert_id()  
+			WHERE b_id = last_insert_id()
+  	</update>
+	
+	
 	
 	
 	<!-- 게시판 불러오기  -->
@@ -120,8 +133,6 @@
 	               		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_board ta))tc
  		 <include refid="Search"></include> 
 		  LIMIT	          		 #{pageNum},5
-
-		       		
 
 	   </select>
 

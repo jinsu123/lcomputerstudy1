@@ -71,6 +71,9 @@
 			<p style="width:5%; font-weight:700;background-color:red;color:#fff;"><a href="/board/delete?bId=${board.bId }">삭제</a></p>
 		</td>
 	</tr>
-
+<br>
+<p style="width:4%; font-weight:700;background-color:#818181;color:#fff;"><a href="/board/insert?b_group=${board.bGroup}&b_order=${board.bOrder}&b_depth=${board.bDepth}">답글쓰기</a></p>
+<br>
+<a href="/board/list">리스트로 돌아가기</a>
 </body>
 </html>

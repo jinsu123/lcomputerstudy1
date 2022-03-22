@@ -22,4 +22,6 @@ public interface BoardMapper {
 	public void boardDelete(Board board);
 
 	public void boardViewCount(Board board);
+
+	public void updateGroup(Board board);
 }

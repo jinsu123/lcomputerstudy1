@@ -33,6 +33,12 @@ public class BoardServicelmpl implements BoardService{
 	@Override
 	public void insertProcess(Board board){
 		 boardMapper.insertProcess(board);
+		 if(board.getbGroup()==0) {
+			 boardMapper.updateGroup(board);
+			 System.out.print(board.getbGroup());
+		 }
+	
+			 
 	}
 	
 	@Override
