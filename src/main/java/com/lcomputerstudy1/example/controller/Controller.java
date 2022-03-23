@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lcomputerstudy1.example.domain.Board;
+import com.lcomputerstudy1.example.domain.Comment;
 import com.lcomputerstudy1.example.domain.Pagination;
 import com.lcomputerstudy1.example.domain.Search;
 import com.lcomputerstudy1.example.domain.User;
 import com.lcomputerstudy1.example.mapper.BoardMapper;
 import com.lcomputerstudy1.example.service.BoardService;
+import com.lcomputerstudy1.example.service.CommentService;
 import com.lcomputerstudy1.example.service.UserService;
 import com.mysql.cj.Session;
 
@@ -31,6 +33,7 @@ public class Controller {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired UserService userservice;
 	@Autowired BoardService boardservice;
+	@Autowired CommentService commentservice;
 	@Autowired PasswordEncoder passwordEncoder;
 	
 	@RequestMapping("/")
@@ -164,6 +167,24 @@ public class Controller {
 		
 		return "/delete";
 	}
+	
+	
+	@RequestMapping("/comment/list")
+	public String commentList(Model model, Pagination pagination ) {
+
+		int commentCount = commentservice.commentCount(pagination);
+		pagination.setCount(commentCount);
+		pagination.init();
+		List<Comment> list = commentservice.selectCommentList(pagination);
+		model.addAttribute("list", list);
+		model.addAttribute("pagination", pagination);
+		
+		return "/aj_list";
+	}
+
+
+	
+	
 	
 }
 	
