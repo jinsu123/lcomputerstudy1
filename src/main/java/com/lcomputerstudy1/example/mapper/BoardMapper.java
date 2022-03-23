@@ -24,4 +24,6 @@ public interface BoardMapper {
 	public void boardViewCount(Board board);
 
 	public void updateGroup(Board board);
+
+	public void updateReBoard(Board board);
 }

@@ -42,6 +42,10 @@ table{
 		margin:0 5px;
 		border-radius:5px;
 	}
+	tdAlign{
+		text-align:left;
+		padding-left:200px;
+	}
 	
 </style>
 <body>
@@ -61,7 +65,15 @@ table{
 		<c:forEach items="${list}" var="list">
 			<tr>
 				<td>${list.ROWNUM}</td>
-				<td><a href="/board/detail?bId=${list.bId}">${list.bTitle}</a></td>
+				<td class="tdAlign">
+					<c:if test="${list.bDepth > 0 }">
+						<c:forEach begin="1" end="${list.bDepth}">
+							&nbsp;&nbsp;
+						</c:forEach>
+						<c:forEach begin="1" end="${list.bDepth}">
+							RE :
+						</c:forEach>
+					</c:if><a href="/board/detail?bId=${list.bId}">${list.bTitle}</a></td>
 				<td>${list.bContent}</td>
 				<td>${list.user.uName}</td>
 				<td>${list.bDatetime}</td>

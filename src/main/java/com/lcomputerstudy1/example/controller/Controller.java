@@ -118,7 +118,10 @@ public class Controller {
 	
 	
 	@RequestMapping("/board/insert")
-	public String boardInsert(Model model) {
+	public String boardInsert(Model model, Board board) {
+		
+		
+		model.addAttribute("board", board);
 		
 		return "/insert";
 	}

@@ -12,9 +12,9 @@
 <h1>글쓰기</h1>
 	<sec:authentication property="principal" var="principal"/>
 	<form action="/board/insertProcess" name="board" method="post">
-		<input type="hidden" name="b_group" value="${board.b_group}">
-		<input type="hidden" name="b_order" value="${board.b_order}">
-		<input type="hidden" name="b_depth" value="${board.b_depth}">
+		<input type="hidden" name="bGroup" value="${board.bGroup}">
+		<input type="hidden" name="bOrder" value="${board.bOrder}">
+		<input type="hidden" name="bDepth" value="${board.bDepth}">
 		<p> 작성자 : ${principal.uName}</p>
 		<p> 제   목 : <input type="text" maxlength="100" size="40" name="bTitle" placeholder="제목을 작성해주세요.">
 		<p> <div style="text-align:middle">내   용 :</div><textarea  style="overflow:auto; height:150px; resize:none;"  cols="100	" rows="100" name="bContent" placeholder="내용을 작성해주세요."></textarea>

@@ -72,7 +72,7 @@
 		</td>
 	</tr>
 <br>
-<p style="width:4%; font-weight:700;background-color:#818181;color:#fff;"><a href="/board/insert?b_group=${board.bGroup}&b_order=${board.bOrder}&b_depth=${board.bDepth}">답글쓰기</a></p>
+<p style="width:4%; font-weight:700;background-color:#818181;color:#fff;"><a href="/board/insert?bGroup=${board.bGroup}&bOrder=${board.bOrder}&bDepth=${board.bDepth}">답글쓰기</a></p>
 <br>
 <a href="/board/list">리스트로 돌아가기</a>
 </body>

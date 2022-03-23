@@ -79,7 +79,11 @@
 			WHERE b_id = last_insert_id()
   	</update>
 	
+	<update id="updateReBoard"  parameterType="Board">
 	
+			UPDATE lc_board SET b_order = b_order+1  
+			WHERE b_group= #{bGroup} and b_order >= #{bOrder} and b_id != last_insert_id()
+  	</update>
 	
 	
 	<!-- 게시판 불러오기  -->
@@ -132,6 +136,7 @@
 		  LEFT JOIN 		     lc_user tb ON ta.u_idx = tb.u_idx, 
 	               		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_board ta))tc
  		 <include refid="Search"></include> 
+ 		  ORDER BY         b_group desc, b_order asc
 		  LIMIT	          		 #{pageNum},5
 
 	   </select>
