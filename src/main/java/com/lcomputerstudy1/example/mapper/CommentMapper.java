@@ -13,4 +13,10 @@ public interface CommentMapper {
 	public List<Comment> selectCommentList(Pagination pagination);
 
 	public int commentCount(Pagination pagination);
+	
+	public void insertProcess(Comment comment);
+	
+	public void updateGroupComment(Comment comment);
+	
+	public void updateReComment(Comment comment);
 }

@@ -12,19 +12,19 @@
 				<th style="width:50%">내용</th>
 				<th style="width:35%">작성일</th>
 			</tr>
-			<c:forEach items="${list}" var="list" varStatus="status">
+			<c:forEach items="${list}" var="list" >
 				<tr>
 					<th>${list.user.uName}</th>
 					<th class="tdAlign">
-						<c:if test="${list.bDepth > 0 }">
-							<c:forEach begin="1" end="${list.bDepth}">
+						<c:if test="${list.cDepth > 0 }">
+							<c:forEach begin="1" end="${list.cDepth}">
 								&nbsp;&nbsp;
 							</c:forEach>
-							<c:forEach begin="1" end="${list.bDepth}">
+							<c:forEach begin="1" end="${list.cDepth}">
 								RE :
 							</c:forEach>
 						</c:if>
-					${list.cContent }</th>
+					${list.cContent}</th>
 					<th>${list.cDatetime }  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="button" class="replyForm" >댓글쓰기</button>
 						<button type="button" id="editForm">수정</button>
@@ -37,7 +37,7 @@
 						<textarea cols="100" rows="1"></textarea>
 					</td>
 					<td>
-						<button type="button" class="reInsertForm" cIdx="${list.cIdx }" bGroup="${list.bGroup }" bOrder="${list.bOrder }" bDepth="${list.bDepth }">등록</button>
+						<button type="button" class="reInsertForm" cIdx="${list.cIdx }" cGroup="${list.cGroup }" cOrder="${list.cOrder }" cDepth="${list.cDepth }">등록</button>
 						<button type="button" class="cancelForm">취소</button>
 					</td>
 				</tr>

@@ -10,9 +10,21 @@ public class Comment {
 	private int cDepth;
 	private int uIdx;
 	private int bId;
+	private User user;
+	private Pagination pagination;
 	
-	
-	
+	public Pagination getPagination() {
+		return pagination;
+	}
+	public void setPagination(Pagination pagination) {
+		this.pagination = pagination;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int getcIdx() {
 		return cIdx;
 	}

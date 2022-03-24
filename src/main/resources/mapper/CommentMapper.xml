@@ -10,10 +10,15 @@
 			<result column="u_name" property="uName"/>
 	</resultMap>
 	
-	<resultMap type="Comment" id="commentResultMap">
+	<resultMap type="Comment" id="CommentResultMap">
 		<result column="c_idx" property="cIdx"/>
 		<result column="c_content" property="cContent"/>
 		<result column="c_datetime" property="cDatetime"/>
+		<result column="c_group" property="cGroup"/>
+		<result column="c_order" property="cOrder"/>
+		<result column="c_depth" property="cDepth"/>
+		<result column="b_id" property="bId"/>
+		<result column="u_idx" property="uIdx"/>
 		<association  property="user" resultMap="User"/>
 	</resultMap>
 
@@ -25,8 +30,8 @@
     	 FROM 				lc_comment
 	</select> 
 	
-		<!-- 댓글 리스트  -->
-	<select id="selectCommentList" parameterType="Commnet" resultMap="CommentResultMap" >
+	<!-- 댓글 리스트  -->
+	<select id="selectCommentList" parameterType="Comment" resultMap="CommentResultMap" >
 	  	      
 	      SELECT                   @ROWNUM := @ROWNUM -1 AS ROWNUM,
 	                     ta.*, tb.u_id, tb.u_name, tb.u_idx
@@ -35,10 +40,36 @@
 			  
 		  LEFT JOIN 		     lc_user tb ON ta.u_idx = tb.u_idx, 
 	               		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_comment ta))tc
-	      WHERE			   b_id = #{bId}         		 
- 		  ORDER BY         b_group desc, b_order asc
+  		 
+ 		  ORDER BY         c_group desc, c_order asc
 		  LIMIT	          		 #{pageNum},5
 
 	   </select>
+
+
+	<!-- 댓글 등록하기  -->
+	<insert id="insertProcess"  parameterType="Comment">
+	  	      
+		insert into lc_comment( c_datetime, c_content,  u_idx, c_group, c_order, c_depth , b_id)
+		VALUES(  now() , #{cContent},  #{uIdx} , #{cGroup}, #{cOrder}, #{cDepth}, #{bId})
+		  	<selectKey keyProperty="cIdx" resultType="int" order="AFTER">
+	    		SELECT LAST_INSERT_ID()
+	  		</selectKey>
+	
+	</insert>
+	
+	<update id="updateGroupComment"  parameterType="Comment">
+	
+			UPDATE lc_comment SET c_group = last_insert_id()  
+			WHERE c_idx = last_insert_id()
+  	</update>
+	
+	<update id="updateReComment"  parameterType="Comment">
+	
+			UPDATE lc_comment SET c_order = c_order+1  
+			WHERE c_group= #{cGroup} and c_order >= #{cOrder} and c_idx != last_insert_id()
+  	</update>
+	
+
 
 </mapper>

@@ -109,11 +109,17 @@ public class Controller {
 	}
 	
 	@RequestMapping("/board/detail")
-	public String boardDetail(Model model, Board board) {
+	public String boardDetail(Model model, Board board, Pagination pagination) {
 		
 		boardservice.boardViewCount(board);
 		board = boardservice.boardDetail(board);
 	
+		int commentCount = commentservice.commentCount(pagination);
+		pagination.setCount(commentCount);
+		pagination.init();
+		List<Comment> list = commentservice.selectCommentList(pagination);
+		model.addAttribute("list", list);
+		model.addAttribute("pagination", pagination);
 		model.addAttribute("board", board);
 		
 		return "/boardDetail";
@@ -183,7 +189,18 @@ public class Controller {
 	}
 
 
-	
+	@RequestMapping("/comment/insert")
+	public String commentInsert(Model model, Comment comment, Authentication authentication ) {
+
+		User user = (User)authentication.getPrincipal();
+		comment.setUser(user);
+		comment.setuIdx(user.getuIdx());
+		commentservice.insertProcess(comment);
+		
+		
+		return "/aj_list";
+	}
+
 	
 	
 }

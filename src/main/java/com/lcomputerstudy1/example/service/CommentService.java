@@ -11,4 +11,7 @@ public interface CommentService {
 	public int commentCount(Pagination pagination);
 
 	public List<Comment> selectCommentList(Pagination pagination);
+
+	public void insertProcess(Comment comment);
+	
 }
