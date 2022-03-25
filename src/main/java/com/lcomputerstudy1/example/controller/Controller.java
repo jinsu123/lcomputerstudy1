@@ -202,6 +202,22 @@ public class Controller {
 	}
 
 	
+	@RequestMapping("/comment/edit")
+	public String commentedit(Model model, Comment comment) {
+		
+		commentservice.editComment(comment);
+		
+		return "/aj_list";
+	}
+	
+	
+	@RequestMapping("/comment/delete")
+	public String commentDelete(Model model, Comment comment) {
+		
+		commentservice.commentDelete(comment);
+		
+		return "/aj_list";
+	}
 	
 }
 	

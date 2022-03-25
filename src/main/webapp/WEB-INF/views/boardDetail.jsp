@@ -293,18 +293,18 @@ $(document).on('click', '.reInsertForm', function () {
 $(document).on('click', '#deleteForm', function () {
 	console.log('deleteForm')
 
-	let b_id = '${board.bId}'
+	let bId = '${board.bId}'
 	console.log('bId')
 	console.log(bId)
 	
-	let c_idx = $(this).attr('c_idx');
+	let c_idx = $(this).attr('cIdx');
 	console.log('c_idx')
 	console.log(c_idx)
 	
 	$.ajax({
 		method: "POST",
-		url: "comment-delete.do",
-		data: {b_id: bId, c_idx: c_idx }
+		url: "/comment/delete",
+		data: {bId: bId, cIdx: c_idx }
 	
 	})
     .done(function( html ) {
@@ -324,15 +324,15 @@ $(document).on('click', '#editForm', function () {
 $(document).on('click', '.reEditForm', function () {
 	console.log('reEditForm')
 
-	let b_id = '${board.bId}'
+	let bId = '${board.bId}'
 	console.log('bId')
 	console.log(bId)
 	
 	
-	let c_idx = $(this).attr('c_idx');
+	let c_idx = $(this).attr('cIdx');
 	console.log('c_idx')
 	console.log(c_idx)
-	let id = '${sessionScope.user.u_name}'
+	let id = '${board.user.uName}'
 	console.log('id')
 	console.log(id)
 
@@ -345,8 +345,8 @@ $(document).on('click', '.reEditForm', function () {
 	
 	$.ajax({
 		method: "POST",
-		url: "comment-edit.do",
-		data: { b_id:bId, c_idx: c_idx, id: id, c_content: c_content}
+		url: "/comment/edit",
+		data: { bId:bId, cIdx: c_idx, id: id, cContent: c_content}
 	
 	})
     .done(function( html ) {

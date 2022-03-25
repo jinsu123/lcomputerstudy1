@@ -46,4 +46,18 @@ public class CommentServiceImpl implements CommentService{
 			 
 	}
 	
+	
+	@Override
+	public void editComment(Comment comment){
+		commentMapper.editComment(comment);
+	}
+	
+			 
+	@Override
+	public void commentDelete(Comment comment){
+		commentMapper.commentDelete(comment);
+	}
+	
+	
+	
 }
