@@ -9,9 +9,18 @@ public class Pagination {
 	private int lastPage;
 	private int prevPage;
 	private int nextPage;
+	private int bId;
+	public int getbId() {
+		return bId;
+	}
+
+	public void setbId(int bId) {
+		this.bId = bId;
+	}
 	public static final int pageUnit=5;  
 	public static final int perPage=5;   
 	Search search;
+
 
 	public Pagination() {
 	}

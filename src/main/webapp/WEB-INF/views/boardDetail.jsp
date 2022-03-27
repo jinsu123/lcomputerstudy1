@@ -250,7 +250,6 @@ $(document).on('click', '#insertForm', function () {
 
 $(document).on('click', '.reInsertForm', function () {
 
-
 	let bId = '${board.bId}'
 	console.log('bId')
 	console.log(bId)

@@ -190,12 +190,19 @@ public class Controller {
 
 
 	@RequestMapping("/comment/insert")
-	public String commentInsert(Model model, Comment comment, Authentication authentication ) {
+	public String commentInsert(Model model, Comment comment, Authentication authentication, Pagination pagination ) {
 
 		User user = (User)authentication.getPrincipal();
 		comment.setUser(user);
 		comment.setuIdx(user.getuIdx());
 		commentservice.insertProcess(comment);
+		
+		int commentCount = commentservice.commentCount(pagination);
+		pagination.setCount(commentCount);
+		pagination.init();
+		List<Comment> list = commentservice.selectCommentList(pagination);
+		model.addAttribute("list", list);
+		model.addAttribute("pagination", pagination);
 		
 		
 		return "/aj_list";

@@ -9,7 +9,7 @@
 			<if test="search.type == 1"> b_title LIKE CONCAT('%',#{search.keyword},'%')</if>
 			<if test="search.type == 2">AND b_content LIKE CONCAT('%', #{search.keyword} ,'%')</if>
 			<if test="search.type == 3">AND b_title LIKE CONCAT('%',#{search.keyword},'%') OR b_content LIKE CONCAT('%', #{search.keyword} ,'%')</if>
-			<if test="search.type == 4">AND b_writer LIKE CONCAT('%' , #{search.keyword} ,'%')</if>
+			<if test="search.type == 4">AND u_name LIKE CONCAT('%' , #{search.keyword} ,'%')</if>
 		</if>
 	</where>
 	</sql>
@@ -28,7 +28,7 @@
 		<result column="b_content" property="bContent"/>
 		<result column="b_datetime" property="bDatetime"/>
 		<result column="b_viewcount" property="bViewcount"/>
-		<result column="rownum" property="ROWNUM"/>
+		<result column="ROWNUM" property="rownum"/>
 		<result column="b_group" property="bGroup"/>
 		<result column="b_order" property="bOrder"/>
 		<result column="b_depth" property="bDepth"/>
@@ -41,7 +41,8 @@
 	<!-- 게시글 수  -->
 	<select id="boardCount" resultType="int">
     	 SELECT			 COUNT(*) count 
-    	 FROM 				lc_board
+    	 FROM 				lc_board ta
+    	 LEFT JOIN 		     lc_user tb ON ta.u_idx = tb.u_idx
 	  	<include refid="Search"></include>
 	</select> 
 
@@ -92,7 +93,6 @@
 					 	  b_id as bId,
 			              b_title as bTitle,
 			              b_content as bContent,
-			              b_writer as bWriter,
 			              b_datetime as bDatetime,
 			              b_viewcount as bViewcount
 			              

@@ -8,16 +8,23 @@ public class Board {
 	private String bDatetime;
 	private int bViewcount;
 	private int uIdx;
-	private int ROWNUM;
+	private int rownum;
 	private User user;	
 	private int bGroup;
 	private int bOrder;
 	private int bDepth;
+	private String uName;
 	
 	
 	
 	
 	
+	public String getuName() {
+		return uName;
+	}
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
 	public int getbGroup() {
 		return bGroup;
 	}
@@ -37,12 +44,7 @@ public class Board {
 		this.bDepth = bDepth;
 	}
 	
-	public int getROWNUM() {
-		return ROWNUM;
-	}
-	public void setROWNUM(int rOWNUM) {
-		ROWNUM = rOWNUM;
-	}
+
 	public int getuIdx() {
 		return uIdx;
 	}
@@ -93,6 +95,12 @@ public class Board {
 	}
 	public void setbDatetime(String bDatetime) {
 		this.bDatetime = bDatetime;
+	}
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
 	}
 	
 
