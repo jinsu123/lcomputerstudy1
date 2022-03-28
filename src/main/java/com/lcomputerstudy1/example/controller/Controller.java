@@ -15,15 +15,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.lcomputerstudy1.example.domain.Board;
 import com.lcomputerstudy1.example.domain.Comment;
+import com.lcomputerstudy1.example.domain.FileUpload;
 import com.lcomputerstudy1.example.domain.Pagination;
 import com.lcomputerstudy1.example.domain.Search;
 import com.lcomputerstudy1.example.domain.User;
 import com.lcomputerstudy1.example.mapper.BoardMapper;
 import com.lcomputerstudy1.example.service.BoardService;
 import com.lcomputerstudy1.example.service.CommentService;
+import com.lcomputerstudy1.example.service.FileUploadService;
 import com.lcomputerstudy1.example.service.UserService;
 import com.mysql.cj.Session;
 
@@ -34,6 +37,7 @@ public class Controller {
 	@Autowired UserService userservice;
 	@Autowired BoardService boardservice;
 	@Autowired CommentService commentservice;
+	@Autowired FileUploadService fileuploadservice;
 	@Autowired PasswordEncoder passwordEncoder;
 	
 	@RequestMapping("/")
@@ -144,6 +148,14 @@ public class Controller {
 		board.setuIdx(user.getuIdx());
 		boardservice.insertProcess(board);
 		
+		if(!board.getFileList().isEmpty()) {
+			for (MultipartFile file : board.getFileList()) {
+				FileUpload upload = new FileUpload();
+				upload.setfName(file.getName());
+				upload.setbId(board.getbId());
+				fileuploadservice.fileUpload(upload);
+			}
+		}
 		return "/insertProcess";
 	}
 	
@@ -210,22 +222,38 @@ public class Controller {
 
 	
 	@RequestMapping("/comment/edit")
-	public String commentedit(Model model, Comment comment) {
+	public String commentedit(Model model, Comment comment ,Authentication authentication, Pagination pagination) {
 		
 		commentservice.editComment(comment);
+		
+		int commentCount = commentservice.commentCount(pagination);
+		pagination.setCount(commentCount);
+		pagination.init();
+		List<Comment> list = commentservice.selectCommentList(pagination);
+		model.addAttribute("list", list);
+		model.addAttribute("pagination", pagination);
 		
 		return "/aj_list";
 	}
 	
 	
 	@RequestMapping("/comment/delete")
-	public String commentDelete(Model model, Comment comment) {
+	public String commentDelete(Model model, Comment comment,Authentication authentication, Pagination pagination) {
 		
 		commentservice.commentDelete(comment);
+		
+		int commentCount = commentservice.commentCount(pagination);
+		pagination.setCount(commentCount);
+		pagination.init();
+		List<Comment> list = commentservice.selectCommentList(pagination);
+		model.addAttribute("list", list);
+		model.addAttribute("pagination", pagination);
 		
 		return "/aj_list";
 	}
 	
+	
+
 }
 	
 	

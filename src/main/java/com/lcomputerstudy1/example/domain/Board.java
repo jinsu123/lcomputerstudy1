@@ -1,5 +1,9 @@
 package com.lcomputerstudy1.example.domain;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class Board {
 	private int bId;
 	private String bTitle;
@@ -14,6 +18,8 @@ public class Board {
 	private int bOrder;
 	private int bDepth;
 	private String uName;
+	private List<MultipartFile> fileList;
+	//private List<FileUpload> fileUpload;
 	
 	
 	
@@ -101,6 +107,12 @@ public class Board {
 	}
 	public void setRownum(int rownum) {
 		this.rownum = rownum;
+	}
+	public List<MultipartFile> getFileList() {
+		return fileList;
+	}
+	public void setFileList(List<MultipartFile> fileList) {
+		this.fileList = fileList;
 	}
 	
 

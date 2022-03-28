@@ -64,7 +64,7 @@ table{
 		</tr>
 		<c:forEach items="${list}" var="list">
 			<tr>
-				<td>${list.ROWNUM}</td>
+				<td>${list.rownum}</td>
 				<td class="tdAlign">
 					<c:if test="${list.bDepth > 0 }">
 						<c:forEach begin="1" end="${list.bDepth}">

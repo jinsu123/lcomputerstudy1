@@ -128,15 +128,15 @@
 	<!-- 게시판 리스트  -->
 	<select id="selectBoardList" parameterType="Board" resultMap="boardResultMap" >
 	  	      
-	      SELECT                   @ROWNUM := @ROWNUM -1 AS ROWNUM,
-	                     ta.*, tb.u_id, tb.u_name, tb.u_idx
+	      SELECT                 @ROWNUM := @ROWNUM -1 AS ROWNUM,
+	                     		 ta.*, tb.u_id, tb.u_name, tb.u_idx
 				                 
 		  FROM	                 lc_board ta
 			  
-		  LEFT JOIN 		     lc_user tb ON ta.u_idx = tb.u_idx, 
-	               		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_board ta))tc
+		  LEFT JOIN 		     lc_user tb ON ta.u_idx = tb.u_idx 
+	      INNER JOIN       		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_board ta)) tc on 1=1
  		 <include refid="Search"></include> 
- 		  ORDER BY         b_group desc, b_order asc
+ 		  ORDER BY         		 b_group desc, b_order asc
 		  LIMIT	          		 #{pageNum},5
 
 	   </select>
