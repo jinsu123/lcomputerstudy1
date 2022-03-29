@@ -1,8 +1,12 @@
 package com.lcomputerstudy1.example.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.swing.filechooser.FileSystemView;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -150,20 +154,29 @@ public class Controller {
 		boardservice.insertProcess(board);
 		
 		
+		String rootPath = "C:/Users/l2-evening/Documents/work10/lcomputerstudy1/src/main/resources/static/img";
+		
 		for (MultipartFile file : board.getFileList()) {
-			if(!board.getFileList().isEmpty()) { 
-			FileUpload upload = new FileUpload();
-			upload.setfName(file.getOriginalFilename());
-			upload.setbId(board.getbId());
-			fileuploadservice.fileUpload(upload);
+			   String originalName = file.getOriginalFilename();
+		       String filePath = rootPath + "/" + originalName;
+		       File dest = new File(filePath);
+		       
+		       try {
+				file.transferTo(dest);
+			} catch (IllegalStateException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
-		
-		
-		
-		
-		
+		for (MultipartFile file1 : board.getFileList()) {
+			if(!board.getFileList().isEmpty()) { 
+				FileUpload upload = new FileUpload();
+				upload.setfName(file1.getOriginalFilename());
+				upload.setbId(board.getbId());
+				fileuploadservice.fileUpload(upload);
+			}
+		}
 		
 		return "/insertProcess";
 	}

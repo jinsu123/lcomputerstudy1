@@ -11,7 +11,6 @@ spring:
   servlet:
     multipart:
       file-size-threshold: 1MB
-      location: C:/Users/l2-evening/Documents/work10/lcomputerstudy1/src/main/webapp/WEB-INF/views
       max-file-size: 100MB
       max-request-size: 100MB
 
