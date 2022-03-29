@@ -31,6 +31,7 @@ import com.lcomputerstudy1.example.service.UserService;
 import com.mysql.cj.Session;
 
 
+
 @org.springframework.stereotype.Controller
 public class Controller {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -148,14 +149,22 @@ public class Controller {
 		board.setuIdx(user.getuIdx());
 		boardservice.insertProcess(board);
 		
-		if(!board.getFileList().isEmpty()) {
-			for (MultipartFile file : board.getFileList()) {
-				FileUpload upload = new FileUpload();
-				upload.setfName(file.getName());
-				upload.setbId(board.getbId());
-				fileuploadservice.fileUpload(upload);
+		
+		for (MultipartFile file : board.getFileList()) {
+			if(!board.getFileList().isEmpty()) { 
+			FileUpload upload = new FileUpload();
+			upload.setfName(file.getOriginalFilename());
+			upload.setbId(board.getbId());
+			fileuploadservice.fileUpload(upload);
 			}
 		}
+		
+		
+		
+		
+		
+		
+		
 		return "/insertProcess";
 	}
 	
