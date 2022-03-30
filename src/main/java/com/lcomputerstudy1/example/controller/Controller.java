@@ -170,7 +170,7 @@ public class Controller {
 				String now = new SimpleDateFormat("yyyyMMddHmss").format(new Date());
 				String realFileName = now + originalName.substring(0);
 //			   	originalName = originalName.substring(originalName.lastIndexOf("\\")+1);
-//				UUID uuid = UUID.randomUUID();
+//				UUID uuid = UUID.randomUUID()
 //				originalName = uuid.toString() + "_" + originalName; 
 //		       	String filePath = rootPath + "/" + originalName;
 				File dest = new File(rootPath, realFileName);
