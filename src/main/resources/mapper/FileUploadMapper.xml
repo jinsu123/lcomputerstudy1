@@ -3,11 +3,26 @@
 <mapper namespace="com.lcomputerstudy1.example.mapper.FileUploadMapper">
 	
 	
+	
+	<resultMap type="FileUpload" id="FileUpload">
+			<result column="b_id" property="bId"/>
+			<result column="f_idx" property="fIdx"/>
+			<result column="f_name" property="fName"/>
+	</resultMap>
+	
 	<!-- 파일 업로도  -->
 	<insert id="fileUpload" >
 		insert into lc_file( b_id, f_name )
 		values(#{bId},#{fName})
 	</insert>
+	
+	
+	<!-- 이미지 상세보기 -->
+	<select id="detailFileUpload" resultMap="FileUpload" parameterType="FileUpload">
+		select * 
+		from lc_file 
+		where b_id=#{bId}
+	</select>
 
 
 </mapper>

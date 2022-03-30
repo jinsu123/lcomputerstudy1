@@ -3,7 +3,10 @@ package com.lcomputerstudy1.example.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.swing.filechooser.FileSystemView;
@@ -118,7 +121,7 @@ public class Controller {
 	}
 	
 	@RequestMapping("/board/detail")
-	public String boardDetail(Model model, Board board, Pagination pagination) {
+	public String boardDetail(Model model, Board board, Pagination pagination, FileUpload fu) {
 		
 		boardservice.boardViewCount(board);
 		board = boardservice.boardDetail(board);
@@ -127,6 +130,11 @@ public class Controller {
 		pagination.setCount(commentCount);
 		pagination.init();
 		List<Comment> list = commentservice.selectCommentList(pagination);
+		
+		
+		List<FileUpload> file = fileuploadservice.detailFileUpload(fu);
+		
+		model.addAttribute("file", file);
 		model.addAttribute("list", list);
 		model.addAttribute("pagination", pagination);
 		model.addAttribute("board", board);
@@ -157,25 +165,41 @@ public class Controller {
 		String rootPath = "C:/Users/l2-evening/Documents/work10/lcomputerstudy1/src/main/resources/static/img";
 		
 		for (MultipartFile file : board.getFileList()) {
-			   String originalName = file.getOriginalFilename();
-		       String filePath = rootPath + "/" + originalName;
-		       File dest = new File(filePath);
+			if(file.getSize()>0) {
+				String originalName = file.getOriginalFilename();
+				String now = new SimpleDateFormat("yyyyMMddHmss").format(new Date());
+				String realFileName = now + originalName.substring(0);
+//			   	originalName = originalName.substring(originalName.lastIndexOf("\\")+1);
+//				UUID uuid = UUID.randomUUID();
+//				originalName = uuid.toString() + "_" + originalName; 
+//		       	String filePath = rootPath + "/" + originalName;
+				File dest = new File(rootPath, realFileName);
 		       
-		       try {
-				file.transferTo(dest);
-			} catch (IllegalStateException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		for (MultipartFile file1 : board.getFileList()) {
-			if(!board.getFileList().isEmpty()) { 
+	
+				try {
+					file.transferTo(dest);
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+				
 				FileUpload upload = new FileUpload();
-				upload.setfName(file1.getOriginalFilename());
+				upload.setfName(realFileName);
+				file.getSize();
 				upload.setbId(board.getbId());
 				fileuploadservice.fileUpload(upload);
+				
+			
 			}
+	
+//		for (MultipartFile file1 : board.getFileList()) {
+//			if(!board.getFileList().isEmpty()) { 
+//				FileUpload upload = new FileUpload();
+//				upload.setfName(file1.getOriginalFilename());
+//				file1.getSize();
+//				upload.setbId(board.getbId());
+//				
+//				fileuploadservice.fileUpload(upload);
+//			}
 		}
 		
 		return "/insertProcess";

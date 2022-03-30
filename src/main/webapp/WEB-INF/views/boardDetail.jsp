@@ -81,6 +81,14 @@
 	</tr>
 </table>
 
+<br>
+<p>첨부파일</p>
+<br>
+<c:forEach items="${file}" var="fload">
+<p><img src="/img/${fload.fName}" height="200" width="200"></p>
+</c:forEach>
+<br>
+
 	<tr style="height:50px;">
 		<td style="border:none;">
 			<p style="width:5%; font-weight:700;background-color:#818181;color:#fff;"><a href="/board/edit?bId=${board.bId }">수정</a></p>
