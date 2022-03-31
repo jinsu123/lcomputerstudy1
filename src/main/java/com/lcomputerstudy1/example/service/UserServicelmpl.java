@@ -20,6 +20,12 @@ public class UserServicelmpl implements UserService{
 		User user = userMapper.readUser(username);
 		user.setAuthorities(getAuthoritites(username));
 
+//		if(user != null) {
+//			user.setuName(user.getuName());
+//			user.setUsername(user.getUsername());
+//			user.setPassword(user.getPassword());
+			
+//		}
 
 		return user;
 	}
