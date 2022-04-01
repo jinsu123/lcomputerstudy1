@@ -8,5 +8,8 @@
 </head>
 <body>
 	<h1>관리자 페이지</h1>
+	
+	<a href="/user_list">회원목록</a>
+	
 </body>
 </html>

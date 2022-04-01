@@ -89,10 +89,24 @@ public class Controller {
 	
 	
 	@Secured({"ROLE_ADMIN"})
-		@RequestMapping(value="/admin")
-		public String admin(Model model) {
-			
-			return "/admin";
+	@RequestMapping(value="/admin")
+	public String admin(Model model) {
+		
+		return "/admin";
+	}
+	
+	@Secured({"ROLE_ADMIN"})
+	@RequestMapping("/user_list")
+	public String userlist(Model model, Pagination pagination) {
+		
+		int userCount = userservice.userCount(pagination);
+		pagination.setCount(userCount);
+		pagination.init();
+		List<User> list = userservice.selectUserList(pagination);
+		model.addAttribute("list", list);
+		model.addAttribute("pagination", pagination);
+		
+		return "/user_list";
 	}
 	
 	@Secured({"ROLE_USER"})

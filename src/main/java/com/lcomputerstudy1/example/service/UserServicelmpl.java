@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.lcomputerstudy1.example.domain.Pagination;
 import com.lcomputerstudy1.example.domain.User;
 import com.lcomputerstudy1.example.mapper.UserMapper;
 
@@ -52,4 +54,15 @@ public class UserServicelmpl implements UserService{
 	}
 
 
+	@Override
+	public int userCount(Pagination pagination) {
+		return userMapper.userCount(pagination);
+	}
+
+	@Override
+	public List<User> selectUserList(Pagination pagination) {
+		return userMapper.selectUserList(pagination);
+	}
+	
+	
 }

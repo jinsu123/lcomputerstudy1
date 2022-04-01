@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcomputerstudy1.example.mapper.UserMapper">
+ 
+
+	
+	<resultMap type="User" id="UserResultMap">
+		<result column="u_idx" property="uIdx"/>
+		<result column="u_id" property="username"/>
+		<result column="u_name" property="uName"/>
+		<collection  property="authorities" resultMap="authMap"/>
+	</resultMap>
+
+	<resultMap type="org.springframework.security.core.authority.SimpleGrantedAuthority" id="authMap">
+		<constructor>
+			<arg column="u_auth" javaType="String"/>
+		</constructor>
+ 	</resultMap>
+ 
+ 
  <!-- 권한 읽기 -->
     <select id="readAuthorities" parameterType="String" resultType="org.springframework.security.core.authority.SimpleGrantedAuthority">
        SELECT         u_auth
@@ -8,6 +25,14 @@
        WHERE          1=1
        AND            u_id = #{username}
     </select>
+
+
+	<!-- 회원수  -->
+	<select id="userCount" resultType="int">
+    	 SELECT			 COUNT(*) count 
+    	 FROM 				lc_user
+	</select> 
+
 
    <!-- 회원 불러오기 -->
    <select id="readUser" parameterType="String" resultType="User">
@@ -60,4 +85,20 @@
          UPDATE
             u_id = #{username}
     </insert>
+    
+    <!-- 회원 리스트  -->
+	<select id="selectUserList" parameterType="User" resultMap="UserResultMap" >
+	  	      
+		SELECT       	         @ROWNUM := @ROWNUM -1 AS ROWNUM,
+	                     		 ta.u_idx, ta.u_id, ta.u_name, tb.u_auth
+	                     		 
+		FROM	                 lc_user ta
+		LEFT JOIN 				 lc_auth tb ON ta.u_id = tb.u_id
+	    INNER JOIN       		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_user tb)) tc on 1=1
+
+		ORDER BY				 u_idx desc
+		LIMIT	          		 #{pageNum},5
+
+	   </select>
+    
 </mapper>

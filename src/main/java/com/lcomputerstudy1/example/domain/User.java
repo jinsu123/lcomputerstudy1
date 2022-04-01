@@ -14,9 +14,35 @@ public class User implements UserDetails{
 	private String uName;
 	private String uDateTime;
 	private int uIdx;
+	private int ROWNUM;
+	private String u_auth;
+	
+	private Collection<? extends GrantedAuthority> authorities;
+	
+	private boolean isAccountNonExpired;
+	private boolean isAccountNonLocked;
+	private boolean isCredentialsNonExpired;
+	private boolean isEnabled;
+	
 	
 
 
+
+	public String getU_auth() {
+		return u_auth;
+	}
+
+	public void setU_auth(String u_auth) {
+		this.u_auth = u_auth;
+	}
+
+	public int getROWNUM() {
+		return ROWNUM;
+	}
+
+	public void setROWNUM(int rOWNUM) {
+		ROWNUM = rOWNUM;
+	}
 
 	public int getuIdx() {
 		return uIdx;
@@ -25,13 +51,6 @@ public class User implements UserDetails{
 	public void setuIdx(int uIdx) {
 		this.uIdx = uIdx;
 	}
-
-	private Collection<? extends GrantedAuthority> authorities;
-	
-	private boolean isAccountNonExpired;
-	private boolean isAccountNonLocked;
-	private boolean isCredentialsNonExpired;
-	private boolean isEnabled;
 	
 	public void setUsername(String username) {
 		this.username = username;
