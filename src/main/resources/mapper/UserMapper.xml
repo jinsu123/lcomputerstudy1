@@ -87,10 +87,10 @@
     </insert>
     
     <!-- 회원 리스트  -->
-	<select id="selectUserList" parameterType="User" resultMap="UserResultMap" >
+	<select id="selectUserList" parameterType="User" resultType="User" >
 	  	      
 		SELECT       	         @ROWNUM := @ROWNUM -1 AS ROWNUM,
-	                     		 ta.u_idx, ta.u_id, ta.u_name, tb.u_auth
+	                     		 ta.u_idx as uIdx, ta.u_id as username, ta.u_name as uName, tb.u_auth
 	                     		 
 		FROM	                 lc_user ta
 		LEFT JOIN 				 lc_auth tb ON ta.u_id = tb.u_id

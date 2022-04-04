@@ -48,7 +48,7 @@
 <body>
 <h1>회원 목록</h1>
 <form action="/updateauth" method="POST" id="form_auth">
-	<input type="hidden" name="auth" value="${item.u_auth}" id="auth">
+	<input type="hidden" name="auth" value="" id="auth">
 	<input type="hidden" name="u_idx" value="" id="uIdx">
 	<table>
 		<tr>
