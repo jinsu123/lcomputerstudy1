@@ -88,6 +88,7 @@
 <p><img src="/img/${fload.fName}" height="200" width="200"></p>
 </c:forEach>
 <br>
+<table>
 	<tr style="height:50px;">
 		<td style="border:none;">
 			<sec:authorize access="hasRole('ROLE_USER')">
@@ -95,11 +96,12 @@
 			</sec:authorize>
 		</td>
 		<td style="border:none;">
-			<sec:authorize access="hasRole('ROLE_ADMIN')||hasRole('ROLE_USER')">
+			<sec:authorize access="hasRole('ROLE_ADMIN')||user.uIdx == board.uIdx">
 			<p style="width:5%; font-weight:700;background-color:red;color:#fff;"><a href="/board/delete?bId=${board.bId }">삭제</a></p>
 			</sec:authorize>
 		</td>
 	</tr>
+</table>
 <br>
 <p style="width:4%; font-weight:700;background-color:#818181;color:#fff;"><a href="/board/insert?bGroup=${board.bGroup}&bOrder=${board.bOrder}&bDepth=${board.bDepth}">답글쓰기</a></p>
 <br>

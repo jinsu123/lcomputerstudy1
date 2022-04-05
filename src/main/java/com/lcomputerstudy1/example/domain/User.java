@@ -89,6 +89,7 @@ public class User implements UserDetails{
 	
 	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
 		this.authorities = authorities;
+		
 	}
 	
 	@Override

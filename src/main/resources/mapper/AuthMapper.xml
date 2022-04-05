@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcomputerstudy1.example.mapper.AuthMapper">
+
+	<update id="updateAuth"  parameterType="Auth">
+	
+
+			UPDATE lc_auth ta
+			INNER JOIN lc_user tb ON ta.u_idx = tb.u_idx
+			SET u_auth = #{uAuth}
+			WHERE ta.u_idx = #{uIdx}
+			
+  	</update>
+
+
+
+
+</mapper>

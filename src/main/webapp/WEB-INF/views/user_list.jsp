@@ -47,9 +47,9 @@
 </style>
 <body>
 <h1>회원 목록</h1>
-<form action="/updateauth" method="POST" id="form_auth">
-	<input type="hidden" name="auth" value="" id="auth">
-	<input type="hidden" name="u_idx" value="" id="uIdx">
+<form action="/updateAuth" method="POST" id="form_auth">
+	<input type="hidden" name="uAuth" value="" id="auth">
+	<input type="hidden" name="uIdx" value="" id="uIdx">
 	<table>
 		<tr>
 			<td colspan="4">전체 회원 수 : ${pagination.count}</td>

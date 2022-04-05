@@ -41,6 +41,8 @@ public class UserServicelmpl implements UserService{
 	@Override
 	public void createUser(User user) {
 		userMapper.createUser(user);
+		userMapper.createAuthority(user);
+		
 	}
 	
 	@Override

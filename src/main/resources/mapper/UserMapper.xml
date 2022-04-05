@@ -70,16 +70,22 @@
          #{isCredentialsNonExpired},
          #{isEnabled}
       )
+      
+       	<selectKey keyProperty="uIdx" resultType="int" order="AFTER">
+	    		SELECT LAST_INSERT_ID()
+	  	</selectKey>
+	  	
    </insert>   
    
     <!-- 유저 권한 추가 -->
     <insert id="createAuthority" parameterType="org.springframework.security.core.GrantedAuthority">
        INSERT INTO lc_auth (
           u_id,
-          u_auth
+          u_auth,
+          u_idx
        ) VALUES
          <foreach item="authority" index="index" collection="authorities" separator=",">
-            (#{username}, #{authority.role})
+            (#{username}, #{authority.role}, #{uIdx})
          </foreach>
          ON DUPLICATE KEY
          UPDATE
@@ -90,13 +96,13 @@
 	<select id="selectUserList" parameterType="User" resultType="User" >
 	  	      
 		SELECT       	         @ROWNUM := @ROWNUM -1 AS ROWNUM,
-	                     		 ta.u_idx as uIdx, ta.u_id as username, ta.u_name as uName, tb.u_auth
+	                     		 ta.u_idx as uIdx, ta.u_id as username, ta.u_name as uName, tb.u_auth, tb.u_id
 	                     		 
 		FROM	                 lc_user ta
 		LEFT JOIN 				 lc_auth tb ON ta.u_id = tb.u_id
 	    INNER JOIN       		 (SELECT @rownum := (SELECT COUNT(*)-#{pageNum}+1 FROM lc_user tb)) tc on 1=1
 
-		ORDER BY				 u_idx desc
+		ORDER BY				 ta.u_idx desc
 		LIMIT	          		 #{pageNum},5
 
 	   </select>

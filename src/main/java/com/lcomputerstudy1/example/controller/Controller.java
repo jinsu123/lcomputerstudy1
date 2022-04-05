@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lcomputerstudy1.example.domain.Auth;
 import com.lcomputerstudy1.example.domain.Board;
 import com.lcomputerstudy1.example.domain.Comment;
 import com.lcomputerstudy1.example.domain.FileUpload;
@@ -31,6 +32,7 @@ import com.lcomputerstudy1.example.domain.Pagination;
 import com.lcomputerstudy1.example.domain.Search;
 import com.lcomputerstudy1.example.domain.User;
 import com.lcomputerstudy1.example.mapper.BoardMapper;
+import com.lcomputerstudy1.example.service.AuthService;
 import com.lcomputerstudy1.example.service.BoardService;
 import com.lcomputerstudy1.example.service.CommentService;
 import com.lcomputerstudy1.example.service.FileUploadService;
@@ -45,6 +47,7 @@ public class Controller {
 	@Autowired UserService userservice;
 	@Autowired BoardService boardservice;
 	@Autowired CommentService commentservice;
+	@Autowired AuthService authservice;
 	@Autowired FileUploadService fileuploadservice;
 	@Autowired PasswordEncoder passwordEncoder;
 	
@@ -77,7 +80,7 @@ public class Controller {
 //		System.out.println("home2");
 		userservice.createUser(user);
 //		System.out.println("home3");
-		userservice.createAuthorities(user);
+//		userservice.createAuthorities(user);
 		
 		return "/login";
 	}
@@ -108,6 +111,26 @@ public class Controller {
 		
 		return "/user_list";
 	}
+	
+	
+	@Secured({"ROLE_ADMIN"})
+	@RequestMapping("/updateAuth")
+	public String updateAuth(Model model, Auth auth, Pagination pagination) {
+		
+		
+		authservice.updateAuth(auth);
+		
+		int userCount = userservice.userCount(pagination);
+		pagination.setCount(userCount);
+		pagination.init();
+		List<User> list = userservice.selectUserList(pagination);
+		model.addAttribute("list", list);
+		model.addAttribute("pagination", pagination);
+		
+		return "/user_list";
+	}
+	
+	
 	
 	@Secured({"ROLE_USER"})
 	@RequestMapping(value="/user/info")
