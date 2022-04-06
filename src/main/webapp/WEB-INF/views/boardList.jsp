@@ -131,7 +131,12 @@ table{
 			</c:choose>
 		</ul>
 	</div>
-	<p><a href="/board/insert?b_group=0&b_order=0&b_depth=0">글쓰기</a></p>
+	<sec:authorize access="hasRole('ROLE_USER')|| hasRole('ROLE_ADMIN')">
+		<p><a href="/board/insert?b_group=0&b_order=0&b_depth=0">글쓰기</a></p>
+	</sec:authorize>
+	
+	<br>
+	<a href="/">홈으로 돌아가기</a>
 	
 </body>
 </html>

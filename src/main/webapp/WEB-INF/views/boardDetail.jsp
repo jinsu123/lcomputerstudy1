@@ -89,25 +89,32 @@
 </c:forEach>
 <br>
 <table>
-	<tr style="height:50px;">
+	<tr style="height:50px ;">
 		<td style="border:none;">
-			<sec:authorize access="hasRole('ROLE_USER')">
-			<p style="width:5%; font-weight:700;background-color:#818181;color:#fff;"><a href="/board/edit?bId=${board.bId }">수정</a></p>
+			<sec:authorize access=" hasRole('ROLE_USER')||hasRole('ROLE_ADMIN')">
+				<sec:authorize access=" ${principal.uIdx == board.user.uIdx}">
+				<p style="width:30%; font-weight:700;background-color:#818181;color:#fff;"><a href="/board/edit?bId=${board.bId }">수정</a></p>
+				</sec:authorize>
 			</sec:authorize>
 		</td>
 		<td style="border:none;">
-			<sec:authorize access="hasRole('ROLE_ADMIN')||user.uIdx == board.uIdx">
-			<p style="width:5%; font-weight:700;background-color:red;color:#fff;"><a href="/board/delete?bId=${board.bId }">삭제</a></p>
+		<sec:authorize access=" hasRole('ROLE_USER')||hasRole('ROLE_ADMIN')">
+			<sec:authorize access="hasRole('ROLE_ADMIN')|| ${principal.uIdx == board.user.uIdx}">
+			<p style="width:30%; font-weight:700;background-color:red;color:#fff;"><a href="/board/delete?bId=${board.bId }">삭제</a></p>
 			</sec:authorize>
+		</sec:authorize>	
 		</td>
 	</tr>
 </table>
 <br>
+<sec:authorize access="hasRole('ROLE_USER')||hasRole('ROLE_ADMIN')">
 <p style="width:4%; font-weight:700;background-color:#818181;color:#fff;"><a href="/board/insert?bGroup=${board.bGroup}&bOrder=${board.bOrder}&bDepth=${board.bDepth}">답글쓰기</a></p>
+</sec:authorize>
 <br>
 <a href="/board/list">리스트로 돌아가기</a>
 
 <br>
+<sec:authorize access="hasRole('ROLE_USER')|| hasRole('ROLE_ADMIN')">
 	<p>댓글쓰기</p>
 <br>	
 	
@@ -202,7 +209,7 @@
 			</ul>
 		</div>
 	</div>
-
+</sec:authorize>
 <script>
 $(document).on('click', '.replyForm', function () {
 	console.log('asdfsadf')
