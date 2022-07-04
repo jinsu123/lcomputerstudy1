@@ -1,4 +1,4 @@
-#spring_project
+# spring_project
 
 계층형 게시판
 - 제목, 내용, 조회수, 작성자, 작성일시
